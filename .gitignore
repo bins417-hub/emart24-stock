@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pem
+server.pid
+server.log
+stock_history_test_backup.json
+.DS_Store

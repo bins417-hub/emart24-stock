@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>이마트24 재고조회 v6</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#080a0c;
+  --panel:#0f1215;
+  --panel2:#15191e;
+  --panel3:#1b2026;
+  --line:#252b32;
+  --text:#f5f6f7;
+  --muted:#89919c;
+  --yellow:#ffd522;
+  --green:#18e36b;
+  --green-bg:#082b18;
+  --red:#ff5058;
+  --red-bg:#321013;
+}
+html{background:var(--bg)}
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% -150px,#1a2026 0,#080a0c 420px);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.w{
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  padding:18px 13px 60px;
+}
+.c{
+  background:linear-gradient(145deg,#101419,#0c0f12);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:13px;
+}
+h1{
+  margin:0 0 5px;
+  font-size:27px;
+  letter-spacing:-1.2px;
+}
+h1 span{
+  color:var(--yellow)!important;
+  font-size:11px!important;
+  border:1px solid #423b13;
+  background:#211e0d;
+  padding:5px 8px;
+  border-radius:20px;
+  vertical-align:middle;
+}
+h2{
+  margin:0 0 15px;
+  font-size:19px;
+  letter-spacing:-.6px;
+}
+.row{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+input,select,button{
+  min-height:48px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  color:var(--text);
+  font-family:inherit;
+  font-size:15px;
+  padding:0 14px;
+  outline:none;
+}
+input::placeholder{color:#6f7781}
+input:focus,select:focus{border-color:#5d6570}
+input{flex:1;min-width:150px}
+select{color-scheme:dark}
+button{
+  background:var(--yellow);
+  color:#111;
+  border-color:var(--yellow);
+  font-weight:800;
+  cursor:pointer;
+}
+button:active{transform:scale(.98)}
+.secondary{
+  color:#c9ced4;
+  background:var(--panel2);
+  border-color:var(--line);
+}
+.active{
+  background:var(--yellow);
+  color:#111;
+  border-color:var(--yellow);
+}
+#locationBtn{
+  background:var(--panel3);
+  color:var(--yellow);
+  border:1px solid #414852;
+}
+#refreshBtn{
+  background:var(--panel3);
+  color:#fff;
+  border-color:#343b44;
+}
+#locmsg,#msg{margin:10px 2px 0}
+.muted{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+.p{
+  position:relative;
+  margin:9px 0;
+  padding:17px 42px 17px 16px;
+  border-radius:17px;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,#15191e,#101317);
+  cursor:pointer;
+}
+.p:after{
+  content:"›";
+  position:absolute;
+  right:17px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:30px;
+  color:#68717d;
+}
+.p:active{
+  border-color:var(--yellow);
+  transform:scale(.995);
+}
+.p b{
+  display:block;
+  font-size:16px;
+  margin-bottom:4px;
+}
+#summary{
+  margin:14px 0 4px;
+  padding:12px 13px;
+  background:#11151a;
+  border:1px solid #20262d;
+  border-radius:13px;
+}
+.store{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:10px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(145deg,#13171c,#0e1114);
+}
+.store>div:first-child{
+  flex:1;
+  min-width:0;
+}
+.store b{
+  font-size:16px;
+  letter-spacing:-.4px;
+}
+.store .muted{
+  display:block;
+  margin-top:4px;
+}
+.qty{
+  flex:none;
+  min-width:88px;
+  padding:10px 11px;
+  border-radius:13px;
+  text-align:center;
+  font-weight:900;
+  white-space:nowrap;
+}
+.yes{
+  color:var(--green);
+  background:var(--green-bg);
+  border:1px solid #0d7137;
+  font-size:17px;
+}
+.zero{
+  color:#c3c8ce;
+  background:#1a1f25;
+  border:1px solid #303740;
+  font-size:13px;
+}
+.unknown{
+  color:#b8bec6;
+  background:#1a1f25;
+  border:1px solid #303740;
+  font-size:12px;
+}
+.dist{
+  display:inline-block;
+  margin-top:7px;
+  padding:4px 7px;
+  border-radius:8px;
+  background:#20252c;
+  color:#aeb5be;
+  font-size:12px;
+  font-weight:700;
+}
+.change{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-top:8px;
+  font-size:12px;
+}
+.up{
+  padding:4px 7px;
+  border-radius:8px;
+  color:var(--green);
+  background:var(--green-bg);
+  font-weight:900;
+}
+.down{
+  padding:4px 7px;
+  border-radius:8px;
+  color:var(--red);
+  background:var(--red-bg);
+  font-weight:900;
+}
+.live{
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+}
+.live:not(:empty):before{
+  content:"● ";
+}
+.radius-wrap{
+  display:flex;
+  width:100%;
+  gap:6px;
+  margin-top:2px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.radius-wrap::-webkit-scrollbar{display:none}
+.radius-btn{
+  min-width:64px;
+  min-height:43px;
+  padding:0 13px;
+  flex:1 0 auto;
+  border-radius:13px;
+}
+.radius-btn.active{
+  background:var(--yellow);
+  color:#111;
+  border-color:var(--yellow);
+}
+
+@media(max-width:600px){
+  .w{padding:10px 9px 45px}
+  .c{
+    border-radius:21px;
+    padding:17px 14px;
+    margin-bottom:10px;
+  }
+  h1{font-size:24px;margin-bottom:16px}
+  h2{font-size:18px}
+  .row{gap:7px}
+  input,select,button{
+    min-height:47px;
+    font-size:14px;
+    border-radius:13px;
+  }
+  #q{
+    width:100%;
+    flex-basis:100%;
+    font-size:16px;
+  }
+  #searchBtn{width:100%}
+  #a1{flex:1}
+  #a2{width:105px;min-width:90px}
+  #locationBtn{width:100%}
+  #allBtn,#stockBtn{flex:1}
+  #sort{width:100%}
+  #interval,#refreshBtn{flex:1}
+  #liveStatus{
+    width:100%;
+    padding:4px 3px;
+  }
+  .store{
+    padding:15px 13px;
+    align-items:flex-start;
+  }
+  .store b{font-size:15px}
+  .qty{
+    min-width:78px;
+    font-size:14px;
+  }
+}
+.interval-wrap{display:flex;flex:1;gap:6px;overflow-x:auto}.interval-btn{flex:1;min-width:62px;min-height:44px;padding:0 12px;border-radius:13px}.interval-btn.active{color:var(--green);background:var(--green-bg);border:1px solid #0d7137}.interval-btn.secondary{color:#aaa;background:var(--panel2);border:1px solid var(--line)}
+.restock{display:inline-block;margin-top:8px;padding:7px 10px;border-radius:10px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);color:#4ade80;font-size:13px;font-weight:700}
+/* V7 APP UI */
+body{margin:0;background:radial-gradient(circle at top,#202020 0,#0b0b0c 38%,#050505 100%);color:#f5f5f5;min-height:100vh}
+.w{max-width:760px;margin:auto;padding:22px 14px 70px}
+.c{background:linear-gradient(145deg,#171719,#101011);border:1px solid #29292c;border-radius:24px;padding:20px;margin-bottom:14px;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+h1{font-size:25px;margin:0 0 20px;font-weight:900;letter-spacing:-1px}
+h1 span{display:inline-flex;align-items:center;margin-left:7px;padding:5px 9px;border-radius:20px;background:rgba(34,197,94,.13);border:1px solid rgba(34,197,94,.35);color:#4ade80;font-size:11px;letter-spacing:.5px;vertical-align:middle}
+h1 span:before{content:"●";margin-right:5px;font-size:8px}
+h2{font-size:18px;margin:0 0 15px;letter-spacing:-.5px}
+input,select{background:#09090a!important;border:1px solid #303033!important;color:#fff!important;border-radius:14px!important;min-height:48px!important}
+input:focus,select:focus{outline:none!important;border-color:#ffe500!important;box-shadow:0 0 0 3px rgba(255,229,0,.08)}
+#q{font-size:16px;font-weight:600}
+#searchBtn{min-height:48px;border-radius:14px;font-weight:900;box-shadow:0 6px 18px rgba(255,229,0,.12)}
+@media(max-width:600px){.w{padding:12px 10px 50px}.c{padding:16px;border-radius:20px}h1{font-size:22px}}
+/* V7 STORE CARDS */
+#sl{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.store{background:linear-gradient(135deg,#151517,#0d0d0e)!important;border:1px solid #29292c!important;border-radius:19px!important;padding:17px!important;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:.18s ease}
+.store:hover{transform:translateY(-1px);border-color:#3b3b3e!important}
+.store b{display:block;font-size:16px;font-weight:850;margin-bottom:5px;color:#fff}
+.store .muted{font-size:12px;color:#888!important;line-height:1.45}
+.dist{display:inline-block;margin-top:7px;padding:4px 8px;background:#202023;border-radius:8px;font-size:11px;color:#bbb}
+.qty{min-width:92px;text-align:center;padding:10px 12px!important;border-radius:13px!important;font-size:14px!important;font-weight:900!important}
+.qty.yes{background:rgba(34,197,94,.13)!important;border:1px solid rgba(34,197,94,.35)!important;color:#4ade80!important}
+.qty.zero{background:rgba(239,68,68,.10)!important;border:1px solid rgba(239,68,68,.25)!important;color:#f87171!important}
+.qty.unknown{background:#202023!important;border:1px solid #333!important;color:#999!important}
+.restock{display:block!important;width:max-content;max-width:100%;box-sizing:border-box;margin-top:9px!important;padding:7px 10px!important;background:linear-gradient(90deg,rgba(34,197,94,.18),rgba(34,197,94,.06))!important;border:1px solid rgba(74,222,128,.4)!important;color:#4ade80!important;border-radius:10px!important;font-size:12px!important;font-weight:850!important}
+.change{margin-top:7px;font-size:12px}
+.up{color:#4ade80;font-weight:800}.down{color:#fb7185;font-weight:800}
+@media(max-width:600px){.store{padding:15px!important}.qty{min-width:78px;font-size:13px!important}.store b{font-size:15px}}
+/* V7 STATS */
+.stats{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:8px!important;margin:14px 0 8px!important}
+.stat{background:#0b0b0c!important;border:1px solid #29292c!important;border-radius:15px!important;padding:13px 8px!important;text-align:center!important}
+.stat span{display:block!important;font-size:11px!important;color:#777!important;margin-bottom:6px!important;white-space:nowrap}
+.stat strong{display:block!important;font-size:21px!important;font-weight:900!important;color:#fff}
+.stat strong.green{color:#4ade80!important}
+.stat strong.red{color:#fb7185!important}
+#summary{margin:15px 2px 0!important;font-size:12px!important;color:#777!important}
+@media(max-width:500px){.stats{gap:5px!important}.stat{padding:11px 4px!important;border-radius:12px!important}.stat span{font-size:10px!important}.stat strong{font-size:19px!important}}
+/* V7 CONTROL PANEL */
+#rb>.row{gap:7px!important;align-items:center!important}
+#allBtn,#stockBtn,#restockBtn{min-height:42px!important;padding:0 13px!important;border-radius:12px!important;font-size:13px!important;font-weight:850!important;white-space:nowrap}
+#allBtn.active,#stockBtn.active{background:#ffe500!important;color:#050505!important;border-color:#ffe500!important}
+#restockBtn.active{background:rgba(34,197,94,.16)!important;color:#4ade80!important;border:1px solid rgba(74,222,128,.45)!important}
+#sort{min-height:42px!important;height:42px!important;font-size:12px!important}
+.radius-wrap{display:flex!important;gap:5px!important;width:100%!important;margin-top:9px!important;overflow-x:auto!important;scrollbar-width:none}
+.radius-wrap::-webkit-scrollbar{display:none}
+.radius-btn{flex:1 0 auto!important;min-width:57px!important;min-height:38px!important;padding:0 10px!important;border-radius:11px!important;font-size:12px!important}
+.radius-btn.active{background:#ffe500!important;color:#050505!important;border-color:#ffe500!important;font-weight:900!important}
+.interval-wrap{display:flex!important;gap:5px!important;overflow-x:auto!important;scrollbar-width:none}
+.interval-wrap::-webkit-scrollbar{display:none}
+.interval-btn{min-width:58px!important;min-height:40px!important;border-radius:11px!important;font-size:12px!important}
+.interval-btn.active{background:rgba(34,197,94,.15)!important;color:#4ade80!important;border:1px solid rgba(74,222,128,.4)!important}
+#refreshBtn{min-height:40px!important;border-radius:11px!important;padding:0 13px!important;font-size:12px!important;white-space:nowrap}
+#liveStatus{font-size:11px!important;white-space:nowrap}
+@media(max-width:600px){ #rb>.row{flex-wrap:wrap!important}#allBtn,#stockBtn,#restockBtn{flex:1!important;padding:0 8px!important}#sort{width:100%!important}.radius-wrap{order:10!important}}
+#restockToast{position:fixed;top:18px;left:50%;transform:translate(-50%,-130px);z-index:9999;width:calc(100% - 28px);max-width:520px;box-sizing:border-box;padding:15px 17px;border-radius:17px;background:rgba(12,28,18,.97);border:1px solid rgba(74,222,128,.55);box-shadow:0 15px 45px rgba(0,0,0,.55);color:#fff;opacity:0;pointer-events:none;transition:.3s ease;font-size:14px}#restockToast.show{transform:translate(-50%,0);opacity:1}#restockToast strong{display:block;color:#4ade80;font-size:15px;margin-bottom:4px}
+</style>
+</head>
+
+<body>
+<div id="restockToast"></div>
+<div class="w">
+
+<div class="c">
+<h1>이마트24 재고조회 <span>LIVE</span></h1>
+
+<div class="row">
+<input id="q" placeholder="상품명 (예: 물, 라면, 포켓몬)">
+<button id="searchBtn">상품 검색</button>
+</div>
+
+<div class="row" style="margin-top:10px">
+<select id="a1">
+<option>서울특별시</option>
+<option>경기도</option>
+<option>인천광역시</option>
+<option>부산광역시</option>
+</select>
+
+<input id="a2" value="광진구">
+<button class="secondary" id="locationBtn">내 위치 사용</button>
+</div>
+
+<p id="locmsg" class="muted"></p>
+<p id="msg"></p>
+</div>
+
+<div class="c" id="pb" style="display:none">
+<h2>상품 선택</h2>
+<div id="pl"></div>
+</div>
+
+<div class="c" id="rb" style="display:none">
+<h2 id="title">매장별 재고</h2>
+
+<div class="row">
+<button id="allBtn">전체</button>
+<button id="stockBtn" class="secondary">재고 있음만</button>
+<button id="restockBtn" class="secondary">🔥 최근 입고</button>
+
+<select id="sort">
+<option value="qty">재고 많은 순</option>
+<option value="distance">거리 가까운 순</option>
+<option value="name">매장명 순</option>
+</select>
+
+<div class="radius-wrap">
+<button type="button" class="radius-btn active" data-radius="0">전체</button>
+<button type="button" class="radius-btn secondary" data-radius="1">1km</button>
+<button type="button" class="radius-btn secondary" data-radius="3">3km</button>
+<button type="button" class="radius-btn secondary" data-radius="5">5km</button>
+<button type="button" class="radius-btn secondary" data-radius="10">10km</button>
+<button type="button" class="radius-btn secondary" data-radius="20">20km</button>
+</div>
+<input type="hidden" id="radius" value="0">
+</div>
+
+<div class="row" style="margin-top:10px">
+<div class="interval-wrap"><button type="button" class="interval-btn secondary" data-sec="0">끔</button><button type="button" class="interval-btn active" data-sec="10">10초</button><button type="button" class="interval-btn secondary" data-sec="30">30초</button><button type="button" class="interval-btn secondary" data-sec="60">1분</button></div><input type="hidden" id="interval" value="10">
+
+<button id="refreshBtn">지금 새로고침</button>
+<span id="liveStatus" class="live"></span>
+</div>
+
+<p id="summary" class="muted"></p>
+<div class="stats">
+  <div class="stat">
+    <span>표시 매장</span>
+    <strong id="statTotal">0</strong>
+  </div>
+  <div class="stat">
+    <span>재고 있음</span>
+    <strong id="statStock" class="green">0</strong>
+  </div>
+  <div class="stat">
+    <span>품절</span>
+    <strong id="statZero" class="red">0</strong>
+  </div>
+  <div class="stat">
+    <span>수량 미확인</span>
+    <strong id="statUnknown">0</strong>
+  </div>
+</div>
+
+<div id="sl"></div>
+</div>
+
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const E=s=>String(s??'').replace(/[&<>"']/g,m=>({
+'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+}[m]));
+
+let stores=[];
+let filter='all';
+let myLat=null;
+let myLon=null;
+let selectedProduct=null;
+let timer=null;
+let previousQty={};
+let changeStats={};
+let lastRefresh=null;
+
+function km(lat1,lon1,lat2,lon2){
+    const R=6371,rad=x=>x*Math.PI/180;
+    const dLat=rad(lat2-lat1);
+    const dLon=rad(lon2-lon1);
+    const a=Math.sin(dLat/2)**2+
+        Math.cos(rad(lat1))*Math.cos(rad(lat2))*
+        Math.sin(dLon/2)**2;
+    return 2*R*Math.asin(Math.sqrt(a));
+}
+
+function getLocation(){
+    if(!navigator.geolocation){
+        $('locmsg').textContent='이 브라우저는 위치 기능을 지원하지 않습니다.';
+        return;
+    }
+
+    $('locmsg').textContent='현재 위치 확인 중...';
+
+    navigator.geolocation.getCurrentPosition(
+        p=>{
+            myLat=p.coords.latitude;
+            myLon=p.coords.longitude;
+            $('locmsg').textContent='현재 위치를 적용했습니다.';
+            render();
+        },
+        ()=>{
+            $('locmsg').textContent='위치 권한을 허용하지 않았거나 위치를 가져오지 못했습니다.';
+        },
+        {enableHighAccuracy:true,timeout:10000}
+    );
+}
+
+async function search(){
+    $('msg').textContent='검색 중...';
+
+    try{
+        const r=await fetch('/api/products?q='+encodeURIComponent($('q').value));
+        const d=await r.json();
+
+        if(!r.ok){
+            $('msg').textContent='오류: '+d.detail;
+            return;
+        }
+
+        $('pl').innerHTML='';
+
+        d.products.forEach(p=>{
+            const x=document.createElement('div');
+            x.className='p';
+            x.innerHTML=
+                '<b>'+E(p.name)+'</b>'+
+                '<div class="muted">상품코드 '+E(p.plu)+' / '+E(p.price)+'</div>';
+
+            x.addEventListener('click',()=>selectProduct(p));
+            $('pl').appendChild(x);
+        });
+
+        $('pb').style.display='block';
+        $('msg').textContent=d.products.length+'개 상품';
+    }catch(e){
+        $('msg').textContent='검색 중 오류가 발생했습니다.';
+    }
+}
+
+function selectProduct(p){
+    selectedProduct=p;
+
+    previousQty={};
+    changeStats={};
+
+    $('rb').style.display='block';
+    $('title').textContent=p.name+' · 매장별 재고';
+
+    loadInventory(false);
+}
+
+async function loadInventory(isAuto=false){
+    if(!selectedProduct) return;
+
+    if(!isAuto) $('sl').textContent='조회 중...';
+
+    const p=selectedProduct;
+
+    const u='/api/inventory?plu='+
+        encodeURIComponent(p.plu)+
+        '&area1='+encodeURIComponent($('a1').value)+
+        '&area2='+encodeURIComponent($('a2').value);
+
+    try{
+        const r=await fetch(u);
+        const d=await r.json();
+
+        if(!r.ok){
+            $('liveStatus').textContent='조회 오류';
+            if(!isAuto) $('sl').textContent='오류: '+d.detail;
+            return;
+        }
+
+        updateChanges(d.stores);
+
+        stores=d.stores;
+        lastRefresh=new Date();
+
+        sync();
+        render();
+    }catch(e){
+        $('liveStatus').textContent='조회 실패';
+    }
+}
+
+let toastTimer=null;
+
+function showRestockToast(store,delta){
+    const el=$('restockToast');
+    el.innerHTML='<strong>🔥 새 입고 감지!</strong>'+
+        E(store.name)+' · +'+delta+'개 · 현재 '+store.quantity+'개';
+    el.classList.add('show');
+
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>el.classList.remove('show'),5000);
+}
+
+function updateChanges(newStores){
+    const now=new Date();
+
+    newStores.forEach(x=>{
+        if(x.stockStatus!=='known') return;
+
+        const key=x.bizNo;
+        const current=Number(x.quantity);
+
+        if(!(key in changeStats)){
+            changeStats[key]={
+                up:0,
+                down:0,
+                lastChange:null,
+                lastDelta:0
+            };
+        }
+
+        if(key in previousQty){
+            const old=previousQty[key];
+            const delta=current-old;
+
+            if(delta>0){
+                changeStats[key].up+=delta;
+                changeStats[key].lastDelta=delta;
+                changeStats[key].lastChange=now;
+                showRestockToast(x,delta);
+            }else if(delta<0){
+                changeStats[key].down+=Math.abs(delta);
+                changeStats[key].lastDelta=delta;
+                changeStats[key].lastChange=now;
+            }
+        }
+
+        previousQty[key]=current;
+    });
+}
+
+function setFilter(v){
+    filter=v;
+    sync();
+    render();
+}
+
+function sync(){
+    $('allBtn').className=filter==='all'?'active':'secondary';
+    $('stockBtn').className=filter==='stock'?'active':'secondary';
+    $('restockBtn').className=filter==='restock'?'active':'secondary';
+}
+
+function distanceOf(x){
+    if(myLat===null||myLon===null||!x.lat||!x.lon) return null;
+    return km(myLat,myLon,Number(x.lat),Number(x.lon));
+}
+
+function render(){
+    let a=[...stores];
+
+    if(filter==='stock'){
+        a=a.filter(x=>x.stockStatus==='known'&&x.quantity>0);
+    }
+
+    if(filter==='restock'){
+        const cutoff=Date.now()-(24*60*60*1000);
+        a=a.filter(x=>x.lastRestock && new Date(x.lastRestock).getTime()>=cutoff && x.stockStatus==='known' && x.quantity>0);
+        a.sort((x,y)=>new Date(y.lastRestock)-new Date(x.lastRestock));
+    }
+
+    const radius=Number($('radius').value);
+
+    if(radius>0){
+        if(myLat===null||myLon===null){
+            $('locmsg').textContent='반경 검색을 사용하려면 먼저 내 위치 사용을 눌러주세요.';
+        }else{
+            a=a.filter(x=>{
+                const d=distanceOf(x);
+                return d!==null&&d<=radius;
+            });
+        }
+    }
+
+    if(filter==='restock'){
+        a.sort((x,y)=>new Date(y.lastRestock)-new Date(x.lastRestock));
+    }
+    else if($('sort').value==='qty'){
+        a.sort((x,y)=>(y.quantity??-1)-(x.quantity??-1));
+    }
+    else if($('sort').value==='distance'){
+        if(myLat===null){
+            $('locmsg').textContent='먼저 내 위치 사용 버튼을 눌러주세요.';
+            $('sort').value='qty';
+            a.sort((x,y)=>(y.quantity??-1)-(x.quantity??-1));
+        }else{
+            a.sort((x,y)=>(distanceOf(x)??99999)-(distanceOf(y)??99999));
+        }
+    }
+    else{
+        a.sort((x,y)=>x.name.localeCompare(y.name,'ko'));
+    }
+
+    const positive=a.filter(
+        x=>x.stockStatus==='known'&&x.quantity>0
+    ).length;
+
+    const zero=a.filter(
+        x=>x.stockStatus==='known'&&x.quantity===0
+    ).length;
+
+    const unknown=a.filter(
+        x=>x.stockStatus==='unknown'
+    ).length;
+
+    $('statTotal').textContent=a.length;
+    $('statStock').textContent=positive;
+    $('statZero').textContent=zero;
+    $('statUnknown').textContent=unknown;
+
+    let summaryText='실시간 재고 현황';
+
+    if(lastRefresh){
+        summaryText+=' · 마지막 조회 '+
+            lastRefresh.toLocaleTimeString('ko-KR',{
+                hour:'2-digit',
+                minute:'2-digit',
+                second:'2-digit'
+            });
+    }
+
+    $('summary').textContent=summaryText;
+
+    if(!a.length){
+        $('sl').innerHTML='<p>조건에 맞는 매장이 없습니다.</p>';
+        return;
+    }
+
+    $('sl').innerHTML=a.map(x=>{
+        let t,c;
+
+        if(x.stockStatus==='unknown'){
+            t='수량 미확인';
+            c='unknown';
+        }else if(x.quantity>0){
+            t='재고 '+x.quantity+'개';
+            c='yes';
+        }else{
+            t='품절 (0개)';
+            c='zero';
+        }
+
+        const d=distanceOf(x);
+
+        const ds=d===null?'':(
+            '<div class="dist">현재 위치에서 약 '+
+            (d<1?Math.round(d*1000)+'m':d.toFixed(1)+'km')+
+            '</div>'
+        );
+
+        const st=changeStats[x.bizNo];
+
+        let change='';
+
+        if(st){
+            const parts=[];
+
+            if(st.up>0){
+                parts.push('<span class="up">▲ 증가 +'+st.up+'</span>');
+            }
+
+            if(st.down>0){
+                parts.push('<span class="down">▼ 감소 -'+st.down+'</span>');
+            }
+
+            if(st.lastChange){
+                parts.push(
+                    '<span class="muted">최근 변동 '+
+                    st.lastChange.toLocaleTimeString('ko-KR',{
+                        hour:'2-digit',
+                        minute:'2-digit',
+                        second:'2-digit'
+                    })+
+                    '</span>'
+                );
+            }
+
+            if(parts.length){
+                change='<div class="change">'+parts.join(' · ')+'</div>';
+            }
+        }
+
+        let restock='';
+        if(x.lastRestock){
+            const rt=new Date(x.lastRestock);
+            const mins=Math.max(0,Math.floor((Date.now()-rt.getTime())/60000));
+            let ago=mins<1?'방금':mins<60?mins+'분 전':Math.floor(mins/60)+'시간 전';
+            restock='<div class="restock">🔥 최근 입고 · '+ago+
+                ' · '+x.fromQty+' → '+x.toQty+'개 · ▲ +'+x.lastIncrease+
+                '</div>';
+        }
+
+        return '<div class="store">'+
+            '<div>'+
+                '<b>'+E(x.name)+'</b>'+
+                '<div class="muted">'+E(x.address)+'</div>'+
+                ds+
+                restock+
+                change+
+            '</div>'+
+            '<div class="qty '+c+'">'+E(t)+'</div>'+
+        '</div>';
+    }).join('');
+}
+
+function setAutoRefresh(){
+    if(timer){
+        clearInterval(timer);
+        timer=null;
+    }
+
+    const sec=Number($('interval').value);
+
+    if(sec<=0){
+        $('liveStatus').textContent='';
+        return;
+    }
+
+    $('liveStatus').textContent='● 자동조회 '+sec+'초';
+
+    timer=setInterval(()=>{
+        loadInventory(true);
+    },sec*1000);
+}
+
+$('searchBtn').addEventListener('click',search);
+
+$('q').addEventListener('keydown',e=>{
+    if(e.key==='Enter') search();
+});
+
+$('locationBtn').addEventListener('click',getLocation);
+
+$('allBtn').addEventListener('click',()=>setFilter('all'));
+$('stockBtn').addEventListener('click',()=>setFilter('stock'));
+$('restockBtn').addEventListener('click',()=>setFilter('restock'));
+
+$('sort').addEventListener('change',render);
+document.querySelectorAll('.radius-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        $('radius').value=btn.dataset.radius;
+
+        document.querySelectorAll('.radius-btn').forEach(x=>{
+            x.className='radius-btn secondary';
+        });
+
+        btn.className='radius-btn active';
+
+        if(Number(btn.dataset.radius)>0 && (myLat===null||myLon===null)){
+            $('locmsg').textContent='반경 검색을 사용하려면 먼저 내 위치 사용을 눌러주세요.';
+        }
+
+        render();
+    });
+});
+document.querySelectorAll('.interval-btn').forEach(btn=>{btn.addEventListener('click',()=>{$('interval').value=btn.dataset.sec;document.querySelectorAll('.interval-btn').forEach(x=>x.className='interval-btn secondary');btn.className='interval-btn active';setAutoRefresh();});});
+
+$('refreshBtn').addEventListener('click',()=>{
+    loadInventory(false);
+});
+
+setAutoRefresh();
+</script>
+
+</body>
+</html>
