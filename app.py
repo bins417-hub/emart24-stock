@@ -1,3 +1,4 @@
+import time
 import json
 from pathlib import Path
 from datetime import datetime
@@ -106,11 +107,49 @@ def get_inventory(plu,a1,a2):
 
 @app.get("/",response_class=HTMLResponse)
 def home(request:Request): return templates.TemplateResponse(request, "index.html")
+product_cache = {}
+PRODUCT_CACHE_SECONDS = 60
+
 @app.get("/api/products")
 def products(q:str):
-    try:return {"products":search_products(q)}
-    except Exception as e:raise HTTPException(502,str(e))
+    try:
+        key = q.strip().lower()
+        now = time.time()
+        cached = product_cache.get(key)
+
+        if cached and now - cached["time"] < PRODUCT_CACHE_SECONDS:
+            return {"products": cached["products"], "cached": True}
+
+        products = search_products(q)
+        product_cache[key] = {
+            "time": now,
+            "products": products
+        }
+
+        return {"products": products, "cached": False}
+
+    except Exception as e:
+        raise HTTPException(502,str(e))
+inventory_cache = {}
+CACHE_SECONDS = 10
+
 @app.get("/api/inventory")
 def inventory(plu:str,area1="서울특별시",area2="광진구"):
-    try:return {"stores":get_inventory(plu,area1,area2)}
-    except Exception as e:raise HTTPException(502,str(e))
+    try:
+        key = (plu, area1, area2)
+        now = time.time()
+        cached = inventory_cache.get(key)
+
+        if cached and now - cached["time"] < CACHE_SECONDS:
+            return {"stores": cached["stores"], "cached": True}
+
+        stores = get_inventory(plu, area1, area2)
+        inventory_cache[key] = {
+            "time": now,
+            "stores": stores
+        }
+
+        return {"stores": stores, "cached": False}
+
+    except Exception as e:
+        raise HTTPException(502,str(e))

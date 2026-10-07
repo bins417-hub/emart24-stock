@@ -5,3 +5,9 @@ server.pid
 server.log
 stock_history_test_backup.json
 .DS_Store
+
+stock_history.json
+*.cer
+
+stock_history.json
+*.cer
