@@ -1,5 +1,7 @@
 import time
 import json
+import os
+import psycopg
 from pathlib import Path
 from datetime import datetime
 
@@ -14,6 +16,10 @@ BASE="https://everse.emart24.co.kr"
 WEB="https://emart24.co.kr"
 s=requests.Session()
 s.headers.update({"User-Agent":"Mozilla/5.0","Accept":"application/json, text/plain, */*","x-requested-with":"XMLHttpRequest"})
+
+@app.on_event("startup")
+def startup():
+    init_db()
 
 def search_products(q):
     r=s.post(BASE+"/stock/stock/search",
@@ -30,6 +36,30 @@ def get_store_codes(a1,a2):
             if x.get("CODE") and str(x.get("USE_YN","Y")).upper()=="Y"]
 
 HISTORY_FILE=Path("stock_history.json")
+DATABASE_URL=os.getenv("DATABASE_URL")
+
+def init_db():
+    if not DATABASE_URL:
+        return
+
+    with psycopg.connect(DATABASE_URL) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS stock_history (
+                    plu TEXT NOT NULL,
+                    biz_no TEXT NOT NULL,
+                    store_name TEXT,
+                    address TEXT,
+                    quantity INTEGER,
+                    last_restock TIMESTAMP,
+                    increase INTEGER,
+                    from_qty INTEGER,
+                    to_qty INTEGER,
+                    PRIMARY KEY (plu, biz_no)
+                )
+            """)
+        conn.commit()
+
 
 def load_history():
     try:
@@ -41,38 +71,103 @@ def save_history(data):
     HISTORY_FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2))
 
 def track_stock(plu, stores):
-    history=load_history()
-    products=history.setdefault("products",{})
-    product=products.setdefault(str(plu),{"stores":{}})
-    old_stores=product.setdefault("stores",{})
-    now=datetime.now().isoformat(timespec="seconds")
+    # 로컬에서는 기존 JSON 방식 사용
+    if not DATABASE_URL:
+        history=load_history()
+        products=history.setdefault("products",{})
+        product=products.setdefault(str(plu),{"stores":{}})
+        old_stores=product.setdefault("stores",{})
+        now=datetime.now().isoformat(timespec="seconds")
 
-    for store in stores:
-        if store["stockStatus"]!="known":
-            continue
+        for store in stores:
+            if store["stockStatus"]!="known":
+                continue
 
-        biz=store["bizNo"]
-        current=store["quantity"]
-        old=old_stores.get(biz,{})
-        previous=old.get("quantity")
+            biz=store["bizNo"]
+            current=store["quantity"]
+            old=old_stores.get(biz,{})
+            previous=old.get("quantity")
 
-        if previous is not None and current>previous:
-            old["lastRestock"]=now
-            old["increase"]=current-previous
-            old["fromQty"]=previous
-            old["toQty"]=current
+            if previous is not None and current>previous:
+                old["lastRestock"]=now
+                old["increase"]=current-previous
+                old["fromQty"]=previous
+                old["toQty"]=current
 
-        old["quantity"]=current
-        old["name"]=store["name"]
-        old["address"]=store["address"]
-        old_stores[biz]=old
+            old["quantity"]=current
+            old["name"]=store["name"]
+            old["address"]=store["address"]
+            old_stores[biz]=old
 
-        store["lastRestock"]=old.get("lastRestock")
-        store["lastIncrease"]=old.get("increase")
-        store["fromQty"]=old.get("fromQty")
-        store["toQty"]=old.get("toQty")
+            store["lastRestock"]=old.get("lastRestock")
+            store["lastIncrease"]=old.get("increase")
+            store["fromQty"]=old.get("fromQty")
+            store["toQty"]=old.get("toQty")
 
-    save_history(history)
+        save_history(history)
+        return stores
+
+    # Render에서는 PostgreSQL 사용
+    with psycopg.connect(DATABASE_URL) as conn:
+        with conn.cursor() as cur:
+            for store in stores:
+                if store["stockStatus"]!="known":
+                    continue
+
+                biz=str(store["bizNo"])
+                current=store["quantity"]
+
+                cur.execute("""
+                    SELECT quantity, last_restock, increase, from_qty, to_qty
+                    FROM stock_history
+                    WHERE plu=%s AND biz_no=%s
+                """, (str(plu), biz))
+
+                row=cur.fetchone()
+
+                last_restock=None
+                increase=None
+                from_qty=None
+                to_qty=None
+
+                if row:
+                    previous=row[0]
+                    last_restock=row[1]
+                    increase=row[2]
+                    from_qty=row[3]
+                    to_qty=row[4]
+
+                    if previous is not None and current>previous:
+                        last_restock=datetime.now()
+                        increase=current-previous
+                        from_qty=previous
+                        to_qty=current
+
+                cur.execute("""
+                    INSERT INTO stock_history
+                    (plu,biz_no,store_name,address,quantity,last_restock,increase,from_qty,to_qty)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                    ON CONFLICT (plu,biz_no)
+                    DO UPDATE SET
+                        store_name=EXCLUDED.store_name,
+                        address=EXCLUDED.address,
+                        quantity=EXCLUDED.quantity,
+                        last_restock=EXCLUDED.last_restock,
+                        increase=EXCLUDED.increase,
+                        from_qty=EXCLUDED.from_qty,
+                        to_qty=EXCLUDED.to_qty
+                """, (
+                    str(plu), biz, store["name"], store["address"],
+                    current, last_restock, increase, from_qty, to_qty
+                ))
+
+                store["lastRestock"]=last_restock.isoformat() if last_restock else None
+                store["lastIncrease"]=increase
+                store["fromQty"]=from_qty
+                store["toQty"]=to_qty
+
+        conn.commit()
+
     return stores
 
 def get_inventory(plu,a1,a2):
