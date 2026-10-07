@@ -42,23 +42,26 @@ def init_db():
     if not DATABASE_URL:
         return
 
-    with psycopg.connect(DATABASE_URL) as conn:
-        with conn.cursor() as cur:
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS stock_history (
-                    plu TEXT NOT NULL,
-                    biz_no TEXT NOT NULL,
-                    store_name TEXT,
-                    address TEXT,
-                    quantity INTEGER,
-                    last_restock TIMESTAMP,
-                    increase INTEGER,
-                    from_qty INTEGER,
-                    to_qty INTEGER,
-                    PRIMARY KEY (plu, biz_no)
-                )
-            """)
-        conn.commit()
+    try:
+        with psycopg.connect(DATABASE_URL, connect_timeout=3) as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS stock_history (
+                        plu TEXT NOT NULL,
+                        biz_no TEXT NOT NULL,
+                        store_name TEXT,
+                        address TEXT,
+                        quantity INTEGER,
+                        last_restock TIMESTAMP,
+                        increase INTEGER,
+                        from_qty INTEGER,
+                        to_qty INTEGER,
+                        PRIMARY KEY (plu, biz_no)
+                    )
+                """)
+            conn.commit()
+    except Exception as e:
+        print("DB startup unavailable:", e)
 
 
 def load_history():
@@ -108,7 +111,14 @@ def track_stock(plu, stores):
         return stores
 
     # Render에서는 PostgreSQL 사용
-    with psycopg.connect(DATABASE_URL) as conn:
+    try:
+        return track_stock_db(plu, stores)
+    except Exception as e:
+        print("DB history unavailable:", e)
+        return stores
+
+def track_stock_db(plu, stores):
+    with psycopg.connect(DATABASE_URL, connect_timeout=3) as conn:
         with conn.cursor() as cur:
             for store in stores:
                 if store["stockStatus"]!="known":
