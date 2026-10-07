@@ -105,7 +105,7 @@ def get_inventory(plu,a1,a2):
     return track_stock(plu,out)
 
 @app.get("/",response_class=HTMLResponse)
-def home(request:Request): return templates.TemplateResponse("index.html",{"request":request})
+def home(request:Request): return templates.TemplateResponse(request, "index.html")
 @app.get("/api/products")
 def products(q:str):
     try:return {"products":search_products(q)}
