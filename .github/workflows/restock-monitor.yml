@@ -58,6 +58,27 @@ jobs:
           VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
         run: |
           python -c "from app import run_push_notification_cycle; print(run_push_notification_cycle())"
+                - name: Validate GitHub VAPID key
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+        run: |
+          python - <<'PY'
+          import os
+          import base64
+          from cryptography.hazmat.primitives import serialization
+
+          try:
+              value = os.environ["VAPID_PRIVATE_KEY"]
+              pem = base64.b64decode(value, validate=True)
+              key = serialization.load_pem_private_key(
+                  pem, password=None
+              )
+              print("GitHub 개인키 검사: 성공")
+              print("키 크기:", key.key_size)
+          except Exception as e:
+              print("GitHub 개인키 검사 실패:", type(e).__name__)
+          PY
       - name: Send one test push
         if: github.event_name == 'workflow_dispatch'
         env:
