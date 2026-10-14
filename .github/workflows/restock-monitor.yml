@@ -58,7 +58,8 @@ jobs:
           VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
         run: |
           python -c "from app import run_push_notification_cycle; print(run_push_notification_cycle())"
-                - name: Validate GitHub VAPID key
+          
+      - name: Validate GitHub VAPID key
         if: github.event_name == 'workflow_dispatch'
         env:
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
