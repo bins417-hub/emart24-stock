@@ -24,7 +24,32 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pywebpush
+      - name: Check registered watch count
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python - <<'PY'
+          import os
+          import psycopg
 
+          with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
+              with conn.cursor() as cur:
+                  cur.execute("""
+                      SELECT
+                          COUNT(*),
+                          COUNT(*) FILTER (
+                              WHERE enabled = TRUE
+                                AND latitude IS NOT NULL
+                                AND longitude IS NOT NULL
+                                AND radius_km BETWEEN 1 AND 20
+                          )
+                      FROM push_watch_items
+                  """)
+                  total, eligible = cur.fetchone()
+
+          print("등록된 전체 알림 상품:", total)
+          print("감시 조건을 만족하는 상품:", eligible)
+          PY
       - name: Run restock monitor
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
