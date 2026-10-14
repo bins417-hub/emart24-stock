@@ -360,7 +360,1155 @@ input:focus,select:focus{outline:none!important;border-color:#ffe500!important;b
 #liveStatus{font-size:11px!important;white-space:nowrap}
 @media(max-width:600px){ #rb>.row{flex-wrap:wrap!important}#allBtn,#stockBtn,#restockBtn{flex:1!important;padding:0 8px!important}#sort{width:100%!important}.radius-wrap{order:10!important}}
 #restockToast{position:fixed;top:18px;left:50%;transform:translate(-50%,-130px);z-index:9999;width:calc(100% - 28px);max-width:520px;box-sizing:border-box;padding:15px 17px;border-radius:17px;background:rgba(12,28,18,.97);border:1px solid rgba(74,222,128,.55);box-shadow:0 15px 45px rgba(0,0,0,.55);color:#fff;opacity:0;pointer-events:none;transition:.3s ease;font-size:14px}#restockToast.show{transform:translate(-50%,0);opacity:1}#restockToast strong{display:block;color:#4ade80;font-size:15px;margin-bottom:4px}
+
+/* PREMIUM DARK V9 */
+:root{
+  --bg:#0b0f14;
+  --panel:#121922;
+  --panel2:#1b2531;
+  --panel3:#222f3c;
+  --line:#293541;
+  --text:#f4f7fa;
+  --muted:#9aa9b8;
+  --yellow:#a3e635;
+  --green:#a3e635;
+  --green-bg:#25351a;
+  --red:#fb7185;
+  --red-bg:#391e29;
+}
+body{
+  background:radial-gradient(ellipse at 50% -150px,#1d2b30 0,#0b0f14 520px);
+}
+.w{max-width:900px}
+.c{
+  background:linear-gradient(145deg,#151e27,#10161e);
+  border-color:#293541;
+  border-radius:22px;
+  box-shadow:0 10px 35px rgba(0,0,0,.12);
+}
+h1{font-size:29px;letter-spacing:-1.3px}
+h2{font-size:19px;letter-spacing:-.5px}
+input,select{
+  background:#0e151d;
+  border:1px solid #344252;
+  border-radius:12px;
+}
+input:focus,select:focus{
+  border-color:#a3e635;
+  box-shadow:0 0 0 3px rgba(163,230,53,.10);
+}
+button{
+  border-radius:12px;
+  transition:background .15s,border-color .15s,transform .15s;
+}
+button:hover{filter:brightness(1.08)}
+button.secondary{
+  background:#1b2531;
+  color:#cbd5e1;
+  border-color:#344252;
+}
+button.active{
+  background:#a3e635;
+  color:#10180a;
+  border-color:#a3e635;
+}
+#locationBtn{
+  background:#24341d;
+  color:#b8f36b;
+  border-color:#456b30;
+}
+#refreshBtn{
+  background:#1b2531;
+  color:#e2e8f0;
+  border-color:#344252;
+}
+.p{
+  background:#18222d;
+  border-color:#2c3947;
+  border-radius:16px;
+}
+.p:hover,.store:hover{
+  border-color:#647f48;
+  background:#1d2a32;
+}
+#summary{
+  background:#18222d;
+  border-color:#2c3947;
+}
+.store{
+  background:#151f29;
+  border-color:#2c3947;
+  border-radius:16px;
+}
+.qty.yes{
+  background:#25351a;
+  color:#b8f36b;
+  border-color:#48682c;
+}
+.dist{
+  background:#26313d;
+  color:#d0dbe5;
+}
+@media(max-width:600px){
+  .w{padding:12px 10px 50px}
+  .c{padding:16px;border-radius:18px}
+  h1{font-size:25px}
+  .store{padding:13px}
+  .qty{min-width:76px}
+}
+
+
+/* PREMIUM DARK V9 FINAL OVERRIDES */
+:root{
+  --yellow:#a3e635;
+  --green:#a3e635;
+}
+h1 span{
+  color:#a3e635!important;
+  background:#24341d!important;
+  border-color:#456b30!important;
+}
+input,select{
+  background:#111b25!important;
+  border-color:#344252!important;
+  color:#f4f7fa!important;
+}
+input:focus,select:focus{
+  border-color:#a3e635!important;
+  box-shadow:0 0 0 3px rgba(163,230,53,.12)!important;
+}
+#searchBtn{
+  background:#a3e635!important;
+  border-color:#a3e635!important;
+  color:#10180a!important;
+  box-shadow:0 6px 18px rgba(163,230,53,.12)!important;
+}
+.store{
+  background:#151f29!important;
+  border-color:#2c3947!important;
+}
+.store:hover{
+  background:#1d2a32!important;
+  border-color:#647f48!important;
+}
+.store .muted{color:#9aa9b8!important}
+.qty.yes{
+  background:#25351a!important;
+  border-color:#48682c!important;
+  color:#b8f36b!important;
+}
+#allBtn.active,#stockBtn.active,
+.radius-btn.active{
+  background:#a3e635!important;
+  border-color:#a3e635!important;
+  color:#10180a!important;
+}
+.interval-btn.active{
+  background:#25351a!important;
+  border-color:#48682c!important;
+  color:#b8f36b!important;
+}
+.stat{
+  background:#111b25!important;
+  border-color:#2c3947!important;
+}
+.stat strong.green{color:#b8f36b!important}
+
+
+/* V9 MAP-FIRST LAYOUT */
+.map-section,.inventory-section{
+  margin-top:22px;
+}
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+.section-heading h2{
+  margin:4px 0 0;
+  font-size:19px;
+}
+.section-label{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  color:#94a3b8;
+}
+.map-live{
+  color:#a3e635;
+  background:#25351a;
+  border:1px solid #48682c;
+  border-radius:20px;
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
+}
+#storeMap{
+  overflow:hidden;
+  border:1px solid #344252;
+  box-shadow:0 12px 32px rgba(0,0,0,.25);
+}
+#mapInfo{margin:10px 2px}
+@media(max-width:600px){
+  #storeMap{height:350px!important}
+  .map-section,.inventory-section{margin-top:20px}
+}
+
+
+/* V9 MAP LOCATION BUTTON */
+.map-locate-btn{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#a3e635;
+    color:#10180a;
+    border:2px solid #10180a;
+    border-radius:12px;
+    font-size:30px;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+}
+.map-locate-btn:hover{
+    background:#bef264;
+}
+
+
+/* V9 MAP ZOOM CONTROLS */
+.leaflet-top.leaflet-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+}
+.leaflet-right .leaflet-control-zoom{
+  border:1px solid #344252!important;
+  border-radius:12px!important;
+  overflow:hidden;
+  box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.leaflet-control-zoom a{
+  background:#1b2531!important;
+  color:#a3e635!important;
+  border-color:#344252!important;
+  width:42px!important;
+  height:42px!important;
+  line-height:42px!important;
+  font-size:24px!important;
+}
+.leaflet-control-zoom a:hover{
+  background:#2b3b4a!important;
+}
+
+
+/* V9 DRAG ZOOM SLIDER */
+.map-zoom-slider{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    padding:12px 8px;
+    background:#1b2531;
+    border:1px solid #344252;
+    border-radius:14px;
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+}
+.zoom-label{
+    color:#a3e635;
+    font-size:20px;
+    font-weight:900;
+    line-height:1;
+}
+.zoom-range{
+    appearance:slider-vertical;
+    -webkit-appearance:slider-vertical;
+    width:28px;
+    height:130px;
+    min-height:130px!important;
+    padding:0!important;
+    accent-color:#a3e635;
+    cursor:pointer;
+}
+
+
+/* V9 지도 컨트롤 컴팩트 디자인 */
+#storeMap .map-locate-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 21px !important;
+    line-height: 34px !important;
+    text-align: center !important;
+    cursor: pointer;
+}
+
+#storeMap .map-zoom-slider {
+    width: 34px !important;
+    min-width: 34px !important;
+    padding: 7px 3px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3px !important;
+}
+
+#storeMap .zoom-range {
+    height: 75px !important;
+    width: 16px !important;
+    margin: 2px 0 !important;
+}
+
+#storeMap .zoom-label {
+    font-size: 12px !important;
+    line-height: 14px !important;
+}
+
+
+/* V9 DAY NIGHT THEME 121 */
+:root {
+    color-scheme: light;
+}
+
+html[data-theme="light"] {
+    --app-bg: #fafafa;
+    --app-card: #ffffff;
+    --app-text: #171717;
+    --app-muted: #737373;
+    --app-border: #e8e8e8;
+    --app-input: #f1f2f4;
+    --app-accent: #e1306c;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --app-bg: #20232b;
+    --app-card: #292c35;
+    --app-text: #f5f5f7;
+    --app-muted: #aeb2bd;
+    --app-border: #414550;
+    --app-input: #343844;
+    --app-accent: #e1306c;
+}
+
+html[data-theme] body {
+    background: var(--app-bg) !important;
+    color: var(--app-text) !important;
+    transition: background .2s, color .2s;
+}
+
+html[data-theme] .card,
+html[data-theme] .panel,
+html[data-theme] .store,
+html[data-theme] header,
+html[data-theme] section {
+    background-color: var(--app-card) !important;
+    color: var(--app-text) !important;
+    border-color: var(--app-border) !important;
+}
+
+html[data-theme] input:not([type="range"]),
+html[data-theme] select,
+html[data-theme] textarea {
+    background-color: var(--app-input) !important;
+    color: var(--app-text) !important;
+    border-color: var(--app-border) !important;
+}
+
+html[data-theme] h1,
+html[data-theme] h2,
+html[data-theme] h3,
+html[data-theme] label {
+    color: var(--app-text) !important;
+}
+
+html[data-theme] button.active,
+html[data-theme] .active {
+    border-color: var(--app-accent) !important;
+}
+
+#themeToggle121 {
+    position: fixed;
+    right: 18px;
+    bottom: 22px;
+    z-index: 9999;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--app-border);
+    background: var(--app-card);
+    color: var(--app-text);
+    box-shadow: 0 4px 16px #00000025;
+    font-size: 21px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#themeToggle121:active {
+    transform: scale(.95);
+}
+
+
+/* V9 INSTAGRAM THEME 122 */
+
+/* 공통 */
+html[data-theme] {
+    --yellow: var(--app-accent);
+    --green: #16a34a;
+    --bg: var(--app-bg);
+    --panel: var(--app-card);
+    --panel2: var(--app-input);
+    --line: var(--app-border);
+}
+
+html[data-theme] body {
+    background: var(--app-bg) !important;
+    color: var(--app-text) !important;
+}
+
+html[data-theme] .c,
+html[data-theme] .card,
+html[data-theme] .panel,
+html[data-theme] .store,
+html[data-theme] .stat {
+    background: var(--app-card) !important;
+    color: var(--app-text) !important;
+    border: 1px solid var(--app-border) !important;
+    box-shadow: none !important;
+    border-radius: 17px !important;
+}
+
+html[data-theme] input:not([type="range"]),
+html[data-theme] select,
+html[data-theme] textarea {
+    background: var(--app-input) !important;
+    color: var(--app-text) !important;
+    border: 1px solid var(--app-border) !important;
+    border-radius: 12px !important;
+}
+
+html[data-theme] input::placeholder {
+    color: var(--app-muted) !important;
+}
+
+html[data-theme] h1,
+html[data-theme] h2,
+html[data-theme] h3,
+html[data-theme] label {
+    color: var(--app-text) !important;
+}
+
+html[data-theme] .dist {
+    background: var(--app-input) !important;
+    color: var(--app-muted) !important;
+}
+
+/* 버튼 */
+html[data-theme] button {
+    border-radius: 12px;
+}
+
+html[data-theme] #allBtn.active,
+html[data-theme] #stockBtn.active,
+html[data-theme] .radius-btn.active,
+html[data-theme] .interval-btn.active {
+    background: #e1306c !important;
+    border-color: #e1306c !important;
+    color: #ffffff !important;
+}
+
+html[data-theme] .radius-btn.secondary,
+html[data-theme] .interval-btn.secondary,
+html[data-theme] #allBtn.secondary,
+html[data-theme] #stockBtn.secondary {
+    background: var(--app-input) !important;
+    border-color: var(--app-border) !important;
+    color: var(--app-text) !important;
+}
+
+/* 주간 */
+html[data-theme="light"] .store {
+    background: #ffffff !important;
+}
+
+html[data-theme="light"] .stat {
+    background: #ffffff !important;
+}
+
+html[data-theme="light"] .qty.yes {
+    background: #eaf8ef !important;
+    color: #15803d !important;
+    border-color: #c7efd3 !important;
+}
+
+html[data-theme="light"] .qty.zero {
+    background: #fff1f2 !important;
+    color: #dc2626 !important;
+    border-color: #fecdd3 !important;
+}
+
+/* 야간 */
+html[data-theme="dark"] .store,
+html[data-theme="dark"] .stat {
+    background: #292c35 !important;
+}
+
+html[data-theme="dark"] .qty.yes {
+    background: #193b2b !important;
+    color: #4ade80 !important;
+    border-color: #28583c !important;
+}
+
+html[data-theme="dark"] .qty.zero {
+    background: #42252c !important;
+    color: #fca5a5 !important;
+    border-color: #69323c !important;
+}
+
+/* 재고 미확인 */
+html[data-theme] .qty.unknown {
+    background: var(--app-input) !important;
+    color: var(--app-muted) !important;
+    border-color: var(--app-border) !important;
+}
+
+/* 지도 자체는 다음 단계에서 별도 테마 적용 */
+
+
+/* V9 THEME COLOR FIX 123 */
+
+/* 상품 검색 버튼 */
+html[data-theme] #searchBtn {
+    background: #e1306c !important;
+    border-color: #e1306c !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+/* LIVE 표시 */
+html[data-theme] h1 span {
+    background: rgba(225,48,108,.10) !important;
+    border-color: rgba(225,48,108,.25) !important;
+    color: #e1306c !important;
+}
+
+/* 매장 이름과 보조 정보 */
+html[data-theme] .store b,
+html[data-theme] .store strong:not(.qty) {
+    color: var(--app-text) !important;
+}
+
+html[data-theme] .store .muted,
+html[data-theme] #summary,
+html[data-theme] .stat span {
+    color: var(--app-muted) !important;
+}
+
+/* 통계 숫자 */
+html[data-theme] .stat strong:not(.green):not(.red) {
+    color: var(--app-text) !important;
+}
+
+html[data-theme] .stat strong.green {
+    color: #16a34a !important;
+}
+
+html[data-theme] .stat strong.red {
+    color: #ef4444 !important;
+}
+
+/* 매장 카드 호버 */
+html[data-theme="light"] .store:hover {
+    background: #f8f8fa !important;
+    border-color: #e1306c !important;
+}
+
+html[data-theme="dark"] .store:hover {
+    background: #343844 !important;
+    border-color: #e1306c !important;
+}
+
+/* 선택되지 않은 버튼 */
+html[data-theme] .radius-btn:not(.active),
+html[data-theme] .interval-btn:not(.active),
+html[data-theme] #allBtn:not(.active),
+html[data-theme] #stockBtn:not(.active),
+html[data-theme] #restockBtn:not(.active),
+html[data-theme] #refreshBtn {
+    background: var(--app-input) !important;
+    border-color: var(--app-border) !important;
+    color: var(--app-text) !important;
+}
+
+/* 최근 입고 필터 */
+html[data-theme] #restockBtn.active {
+    background: #e1306c !important;
+    border-color: #e1306c !important;
+    color: #ffffff !important;
+}
+
+/* 입력창 포커스 */
+html[data-theme] input:focus,
+html[data-theme] select:focus {
+    border-color: #e1306c !important;
+    box-shadow: 0 0 0 3px rgba(225,48,108,.12) !important;
+}
+
+/* 지도 컨트롤은 크기와 기능 유지 */
+
+
+/* V9 PRODUCT CARD THEME FIX 124 */
+
+/* 상품 선택 영역의 기존 네이비 배경 제거 */
+html[data-theme="light"] #results > *,
+html[data-theme="light"] #products > *,
+html[data-theme="light"] #productList > * {
+    background: #ffffff !important;
+    color: #171717 !important;
+    border-color: #e8e8e8 !important;
+}
+
+html[data-theme="dark"] #results > *,
+html[data-theme="dark"] #products > *,
+html[data-theme="dark"] #productList > * {
+    background: #292c35 !important;
+    color: #f5f5f7 !important;
+    border-color: #414550 !important;
+}
+
+/* 상품명과 상품코드 */
+html[data-theme="light"] #results b,
+html[data-theme="light"] #products b,
+html[data-theme="light"] #productList b {
+    color: #171717 !important;
+}
+
+html[data-theme="dark"] #results b,
+html[data-theme="dark"] #products b,
+html[data-theme="dark"] #productList b {
+    color: #f5f5f7 !important;
+}
+
+/* 내 위치 사용 버튼 */
+html[data-theme] #locBtn,
+html[data-theme] #locationBtn,
+html[data-theme] #gpsBtn {
+    background: #e1306c !important;
+    border-color: #e1306c !important;
+    color: #ffffff !important;
+}
+
+
+/* V9 READABILITY FIX 126 */
+
+/* 상품 카드 */
+html[data-theme="light"] .p {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    color: #171717 !important;
+}
+
+html[data-theme="dark"] .p {
+    background: #292c35 !important;
+    border: 1px solid #414550 !important;
+    color: #f5f5f7 !important;
+}
+
+/* 상품명 */
+html[data-theme="light"] .p b {
+    color: #171717 !important;
+}
+
+html[data-theme="dark"] .p b {
+    color: #f5f5f7 !important;
+}
+
+/* 상품코드 */
+html[data-theme="light"] .p .muted {
+    color: #737373 !important;
+}
+
+html[data-theme="dark"] .p .muted {
+    color: #aeb2bd !important;
+}
+
+/* 실시간 재고 현황 텍스트 */
+html[data-theme="light"] #summary {
+    background: #f3f4f6 !important;
+    color: #52525b !important;
+}
+
+html[data-theme="dark"] #summary {
+    background: #292c35 !important;
+    color: #e5e7eb !important;
+}
+
+
+/* V9 MAP CONTROLS THEME 127 */
+
+/* 주간 지도 컨트롤 */
+html[data-theme="light"] {
+    --map-control-bg: rgba(255,255,255,.95);
+    --map-control-text: #334155;
+    --map-control-border: rgba(51,65,85,.20);
+    --map-control-accent: #475569;
+}
+
+/* 야간 지도 컨트롤 */
+html[data-theme="dark"] {
+    --map-control-bg: rgba(38,43,54,.96);
+    --map-control-text: #e2e8f0;
+    --map-control-border: rgba(180,190,205,.25);
+    --map-control-accent: #93b4df;
+}
+
+/* 확대·축소 컨트롤 */
+html[data-theme] #storeMap .map-zoom-slider {
+    background: var(--map-control-bg) !important;
+    color: var(--map-control-text) !important;
+    border: 1px solid var(--map-control-border) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,.16) !important;
+}
+
+/* 슬라이더 */
+html[data-theme] #storeMap .zoom-range {
+    accent-color: var(--map-control-accent) !important;
+}
+
+/* 슬라이더 위아래 숫자 */
+html[data-theme] #storeMap .zoom-label {
+    color: var(--map-control-text) !important;
+}
+
+/* 내 위치 버튼 */
+html[data-theme] #storeMap .map-locate-btn {
+    background: var(--map-control-bg) !important;
+    color: var(--map-control-text) !important;
+    border: 1px solid var(--map-control-border) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,.16) !important;
+}
+
+/* 지도 컨트롤 호버 */
+html[data-theme] #storeMap .map-locate-btn:hover {
+    background: var(--map-control-bg) !important;
+    color: var(--map-control-accent) !important;
+}
+
+/* LIVE MAP 상태 표시 */
+html[data-theme="light"] .live-map,
+html[data-theme="light"] .map-live {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    border-color: #cbd5e1 !important;
+}
+
+html[data-theme="dark"] .live-map,
+html[data-theme="dark"] .map-live {
+    background: #303846 !important;
+    color: #cbd5e1 !important;
+    border-color: #475569 !important;
+}
+
+
+/* V9 NAVER WALK BUTTON 132 */
+html[data-theme] .naver-walk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 9px 13px;
+    min-height: 36px;
+    background: var(--app-input) !important;
+    color: var(--app-text) !important;
+    border: 1px solid var(--app-border) !important;
+    border-radius: 11px !important;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+html[data-theme] .naver-walk-btn:hover {
+    border-color: #e1306c !important;
+}
+
+
+/* V9 MARKER POPUP STYLE 133 */
+#storeMap .map-store-popup {
+    min-width: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+#storeMap .map-store-popup b {
+    font-size: 14px;
+    color: #171717;
+}
+
+#storeMap .map-popup-address {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #64748b;
+}
+
+#storeMap .map-popup-stock {
+    font-size: 13px;
+    color: #16a34a;
+}
+
+#storeMap .map-store-popup .naver-walk-btn {
+    width: 100%;
+    margin-top: 5px;
+    background: #334155 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
+    cursor: pointer;
+}
+
+#storeMap .map-store-popup .naver-walk-btn:hover {
+    background: #475569 !important;
+}
+
+
+/* V9 DESIGN REFINEMENT 134 */
+
+/* 매장 카드 */
+#sl .store {
+    border-radius: 16px !important;
+    padding: 16px !important;
+    margin-bottom: 10px;
+    gap: 12px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+#sl .store:hover {
+    border-color: #e1306c !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+}
+
+#sl .store > div:first-child {
+    min-width: 0;
+    flex: 1;
+}
+
+#sl .store b {
+    font-size: 14px;
+    letter-spacing: -.2px;
+}
+
+#sl .store .muted {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+#sl .store .dist {
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+/* 재고 수량 배지 */
+#sl .store .qty {
+    align-self: flex-start;
+    flex-shrink: 0;
+    border-radius: 999px !important;
+    padding: 6px 10px !important;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* 길안내 버튼 */
+#sl .store .naver-walk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 9px 14px !important;
+    background: rgba(225,48,108,.09) !important;
+    color: #c02663 !important;
+    border: 1px solid rgba(225,48,108,.16) !important;
+    border-radius: 10px !important;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+#sl .store .naver-walk-btn:hover {
+    background: rgba(225,48,108,.16) !important;
+}
+
+/* 지도 팝업 공통 */
+#storeMap .leaflet-popup-content-wrapper {
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.16);
+}
+
+#storeMap .leaflet-popup-content {
+    margin: 15px;
+}
+
+#storeMap .map-store-popup {
+    min-width: 200px;
+    gap: 8px;
+}
+
+#storeMap .map-store-popup b {
+    font-size: 14px;
+}
+
+#storeMap .map-popup-address {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+#storeMap .map-popup-stock {
+    display: inline-block;
+    width: fit-content;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: rgba(34,197,94,.12);
+    color: #15803d;
+    font-size: 12px;
+}
+
+#storeMap .map-store-popup .naver-walk-btn {
+    background: #e1306c !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 11px !important;
+    font-weight: 700;
+}
+
+/* 야간 모드 */
+html[data-theme="dark"] #sl .store .naver-walk-btn {
+    background: rgba(244,114,182,.12) !important;
+    color: #f9a8d4 !important;
+    border-color: rgba(244,114,182,.22) !important;
+}
+
+html[data-theme="dark"] #storeMap .leaflet-popup-content-wrapper,
+html[data-theme="dark"] #storeMap .leaflet-popup-tip {
+    background: #1c2535;
+    color: #f8fafc;
+}
+
+html[data-theme="dark"] #storeMap .map-store-popup b {
+    color: #f8fafc;
+}
+
+html[data-theme="dark"] #storeMap .map-popup-address {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] #storeMap .map-popup-stock {
+    background: rgba(34,197,94,.15);
+    color: #86efac;
+}
+
+
+/* V9 FAVORITES STYLE 135-2 */
+.fav-product-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.fav-product-info{
+    flex:1;
+    min-width:0;
+}
+
+.fav-heart{
+    flex-shrink:0;
+    width:38px;
+    height:38px;
+    border:1px solid rgba(225,48,108,.25) !important;
+    border-radius:50% !important;
+    background:transparent !important;
+    color:#e1306c !important;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+}
+
+.fav-heart.is-favorite{
+    background:rgba(225,48,108,.1) !important;
+}
+
+#favorites135{
+    margin:14px 0;
+    padding:15px;
+    border:1px solid var(--app-border,#e5e7eb);
+    border-radius:16px;
+    background:var(--app-input,#fff);
+}
+
+.favorites-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.favorites-heading strong{
+    color:#e1306c;
+    font-size:14px;
+}
+
+.favorites-heading span,
+.favorites-empty{
+    font-size:12px;
+    opacity:.7;
+}
+
+.favorites-items{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.favorite-item{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    padding:10px 12px !important;
+    border:1px solid var(--app-border,#e5e7eb) !important;
+    border-radius:11px !important;
+    background:transparent !important;
+    color:var(--app-text,inherit) !important;
+    cursor:pointer;
+    text-align:left;
+}
+
+.favorite-item span{
+    font-size:12px;
+    font-weight:700;
+}
+
+.favorite-item small{
+    font-size:10px;
+    opacity:.65;
+}
+
+html[data-theme="dark"] #favorites135{
+    background:#1c2535;
+    border-color:#334155;
+}
+
+
+/* V9 FAVORITE ALERT STYLE 135-3 */
+#favorites135 .favorite-entry {
+    display: flex;
+    align-items: stretch;
+    gap: 5px;
+    border: 1px solid var(--app-border, #e5e7eb);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#favorites135 .favorite-entry .favorite-item {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+#favorites135 .favorite-alert-btn {
+    min-width: 42px;
+    padding: 8px !important;
+    border: none !important;
+    border-left: 1px solid var(--app-border, #e5e7eb) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#favorites135 .favorite-alert-btn[aria-pressed="true"] {
+    background: rgba(225,48,108,.10) !important;
+}
+
+html[data-theme="dark"] #favorites135 .favorite-entry {
+    border-color: #334155;
+}
+
+html[data-theme="dark"] #favorites135 .favorite-alert-btn {
+    border-left-color: #334155 !important;
+}
+
+
+/* V9 STOCK ALERT STYLE 135-4 */
+.fav-heart{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 !important;
+}
+
+.fav-heart svg{
+    width:21px;
+    height:21px;
+    flex-shrink:0;
+}
+
+#stockAlert135{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:99999;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:min(360px,calc(100vw - 36px));
+    pointer-events:none;
+}
+
+#stockAlert135 .stock-alert-item{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    padding:15px;
+    border-radius:14px;
+    background:#e1306c;
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    line-height:1.6;
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
+    pointer-events:auto;
+}
+
+#stockAlert135 button{
+    background:transparent !important;
+    border:none !important;
+    color:#fff !important;
+    font-size:22px;
+    line-height:1;
+    cursor:pointer;
+}
+
+html[data-theme="dark"] #stockAlert135 .stock-alert-item{
+    background:#9d174d;
+}
+
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -383,7 +1531,7 @@ input:focus,select:focus{outline:none!important;border-color:#ffe500!important;b
 <option>부산광역시</option>
 </select>
 
-<input id="a2" value="광진구">
+<input id="a2" value="" placeholder="현재 위치 확인 중...">
 <button class="secondary" id="locationBtn">내 위치 사용</button>
 </div>
 
@@ -400,8 +1548,8 @@ input:focus,select:focus{outline:none!important;border-color:#ffe500!important;b
 <h2 id="title">매장별 재고</h2>
 
 <div class="row">
-<button id="allBtn">전체</button>
-<button id="stockBtn" class="secondary">재고 있음만</button>
+<button id="allBtn" class="secondary">전체</button>
+<button id="stockBtn" class="active">재고 있음만</button>
 <button id="restockBtn" class="secondary">🔥 최근 입고</button>
 
 <select id="sort">
@@ -428,27 +1576,43 @@ input:focus,select:focus{outline:none!important;border-color:#ffe500!important;b
 <span id="liveStatus" class="live"></span>
 </div>
 
-<p id="summary" class="muted"></p>
-<div class="stats">
-  <div class="stat">
-    <span>표시 매장</span>
-    <strong id="statTotal">0</strong>
+<div class="map-section">
+  <div class="section-heading">
+    <div>
+      <span class="section-label">STORE LOCATOR</span>
+      <h2>내 주변 재고 지도</h2>
+    </div>
+    <span class="map-live">● LIVE MAP</span>
   </div>
-  <div class="stat">
-    <span>재고 있음</span>
-    <strong id="statStock" class="green">0</strong>
+  <div id="storeMap" style="height:420px;width:100%;border-radius:18px;z-index:0"></div>
+  <p id="mapInfo" class="muted">지도 준비 중...</p>
+</div>
+
+<div class="inventory-section">
+  <div class="section-heading">
+    <div>
+      <span class="section-label">INVENTORY OVERVIEW</span>
+      <h2>재고 현황</h2>
+    </div>
   </div>
-  <div class="stat">
-    <span>품절</span>
-    <strong id="statZero" class="red">0</strong>
-  </div>
-  <div class="stat">
-    <span>수량 미확인</span>
-    <strong id="statUnknown">0</strong>
+  <p id="summary" class="muted"></p>
+  <div class="stats">
+    <div class="stat"><span>표시 매장</span><strong id="statTotal">0</strong></div>
+    <div class="stat"><span>재고 있음</span><strong id="statStock" class="green">0</strong></div>
+    <div class="stat"><span>품절</span><strong id="statZero" class="red">0</strong></div>
+    <div class="stat"><span>수량 미확인</span><strong id="statUnknown">0</strong></div>
   </div>
 </div>
 
-<div id="sl"></div>
+<div class="inventory-section">
+  <div class="section-heading">
+    <div>
+      <span class="section-label">NEARBY STORES</span>
+      <h2>매장별 재고</h2>
+    </div>
+  </div>
+  <div id="sl"></div>
+</div>
 </div>
 
 </div>
@@ -460,7 +1624,7 @@ const E=s=>String(s??'').replace(/[&<>"']/g,m=>({
 }[m]));
 
 let stores=[];
-let filter='all';
+let filter='stock';
 let myLat=null;
 let myLon=null;
 let selectedProduct=null;
@@ -491,8 +1655,8 @@ function getLocation(){
         p=>{
             myLat=p.coords.latitude;
             myLon=p.coords.longitude;
-            $('locmsg').textContent='현재 위치를 적용했습니다.';
-            render();
+            $('locmsg').textContent='현재 위치의 지역을 확인 중...';
+            detectMyArea();
         },
         ()=>{
             $('locmsg').textContent='위치 권한을 허용하지 않았거나 위치를 가져오지 못했습니다.';
@@ -500,6 +1664,281 @@ function getLocation(){
         {enableHighAccuracy:true,timeout:10000}
     );
 }
+
+
+const nearbyDistricts = {
+    '광진구': ['광진구', '성동구', '중랑구', '동대문구', '송파구', '강동구'],
+    '성동구': ['성동구', '광진구', '동대문구', '중구', '용산구'],
+    '중랑구': ['중랑구', '광진구', '동대문구', '노원구'],
+    '동대문구': ['동대문구', '광진구', '성동구', '중랑구', '성북구', '종로구'],
+    '송파구': ['송파구', '광진구', '강동구', '강남구'],
+    '강동구': ['강동구', '광진구', '송파구']
+};
+
+const nearbyRegions = {
+    '광진구': ['서울특별시:광진구', '서울특별시:성동구', '서울특별시:중랑구', '서울특별시:동대문구', '경기도:구리시'],
+    '성동구': ['서울특별시:성동구', '서울특별시:광진구', '서울특별시:동대문구', '서울특별시:중구', '서울특별시:용산구'],
+    '중랑구': ['서울특별시:중랑구', '서울특별시:광진구', '서울특별시:동대문구', '서울특별시:노원구', '경기도:구리시'],
+    '동대문구': ['서울특별시:동대문구', '서울특별시:광진구', '서울특별시:성동구', '서울특별시:중랑구', '서울특별시:성북구'],
+    '송파구': ['서울특별시:송파구', '서울특별시:강동구', '서울특별시:강남구', '경기도:하남시', '경기도:성남시', '경기도:수정구', '경기도:중원구', '경기도:분당구'],
+    '강동구': ['서울특별시:강동구', '서울특별시:송파구', '경기도:하남시', '경기도:구리시', '경기도:성남시', '경기도:수정구', '경기도:중원구', '경기도:분당구']
+};
+
+async function detectMyArea() {
+    try {
+        const url = 'https://nominatim.openstreetmap.org/reverse?' +
+            'format=json&zoom=10&addressdetails=1&lat=' +
+            encodeURIComponent(myLat) +
+            '&lon=' + encodeURIComponent(myLon);
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('주소 조회 실패');
+
+        const data = await response.json();
+        const addr = data.address || {};
+
+        const city = addr.city || addr.province || addr.state || '';
+        const district = addr.city_district || addr.borough ||
+            addr.county || '';
+
+        if (!city || !district) {
+            throw new Error('행정구역 확인 실패');
+        }
+
+        const cityOptions = Array.from($('a1').options);
+        const matched = cityOptions.find(option =>
+            city.includes(option.value) || option.value.includes(city)
+        );
+
+        if (!matched) {
+            throw new Error('현재 지역은 검색 지원 지역이 아닙니다');
+        }
+
+        $('a1').value = matched.value;
+        $('a2').value = district;
+        $('sort').value = 'distance';
+
+        $('locmsg').textContent =
+            '현재 위치 적용: ' + matched.value + ' ' + district;
+
+        if (selectedProduct) {
+            loadInventory(false);
+        } else {
+            render();
+        }
+    } catch (error) {
+        $('locmsg').textContent =
+            '위치는 확인했지만 지역 자동 설정에 실패했습니다. 지역을 직접 선택해주세요.';
+        render();
+    }
+}
+
+
+/* V9 FAVORITES 135-2 */
+const FAVORITES_KEY = 'emart24-v9-favorites';
+
+function getFavorites(){
+    try{
+        const data=JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]');
+        return Array.isArray(data)?data:[];
+    }catch(e){
+        return [];
+    }
+}
+
+function isFavorite(plu){
+    return getFavorites().some(x=>String(x.plu)===String(plu));
+}
+
+function toggleFavorite(product){
+    let items=getFavorites();
+    const key=String(product.plu);
+
+    if(items.some(x=>String(x.plu)===key)){
+        items=items.filter(x=>String(x.plu)!==key);
+    }else{
+        items.push({
+            plu:product.plu,
+            name:product.name,
+            price:product.price
+        });
+    }
+
+    try{
+        localStorage.setItem(FAVORITES_KEY,JSON.stringify(items));
+    }catch(e){
+        alert('즐겨찾기를 저장할 수 없습니다.');
+    }
+}
+
+
+/* V9 SVG HEART AND STOCK ALERT 135-4 */
+function favoriteHeartSVG(active){
+    return '<svg viewBox="0 0 24 24" width="21" height="21" '+
+        'fill="'+(active?'currentColor':'none')+'" '+
+        'stroke="currentColor" stroke-width="2" '+
+        'stroke-linecap="round" stroke-linejoin="round" '+
+        'aria-hidden="true" style="display:block;margin:auto">'+
+        '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>'+
+        '</svg>';
+}
+
+let alertPreviousStock = new Map();
+let alertTrackingPlu = null;
+
+function showStockAlert(message){
+    let box = document.getElementById('stockAlert135');
+    if(!box){
+        box = document.createElement('div');
+        box.id = 'stockAlert135';
+        box.setAttribute('role','status');
+        box.setAttribute('aria-live','polite');
+        document.body.appendChild(box);
+    }
+
+    const item = document.createElement('div');
+    item.className = 'stock-alert-item';
+
+    const text = document.createElement('span');
+    text.textContent = '🔔 ' + message;
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = '×';
+    close.setAttribute('aria-label','알림 닫기');
+    close.addEventListener('click',()=>item.remove());
+
+    item.append(text,close);
+    box.prepend(item);
+
+    while(box.children.length > 4){
+        box.lastElementChild.remove();
+    }
+}
+
+function checkFavoriteRestock(product, list){
+    if(!product || !Array.isArray(list)) return;
+
+    const plu = String(product.plu);
+
+    if(alertTrackingPlu !== plu){
+        alertPreviousStock.clear();
+        alertTrackingPlu = plu;
+    }
+
+    const enabled = isFavorite(plu) && isFavoriteAlertEnabled(plu);
+    const next = new Map();
+
+    for(const store of list){
+        if(store.stockStatus !== 'known') continue;
+
+        const biz = String(store.bizNo);
+        const qty = Number(store.quantity) || 0;
+        const key = plu + ':' + biz;
+
+        next.set(key,qty);
+
+        if(enabled &&
+           alertPreviousStock.has(key) &&
+           alertPreviousStock.get(key) === 0 &&
+           qty > 0){
+            showStockAlert(
+                product.name + ' · ' +
+                store.name + ' · 재고 ' + qty + '개 입고!'
+            );
+        }
+    }
+
+    alertPreviousStock = next;
+}
+
+function updateFavoriteHearts(){
+    document.querySelectorAll('.fav-heart').forEach(btn=>{
+        const active=isFavorite(btn.dataset.favPlu);
+        btn.innerHTML=favoriteHeartSVG(active);
+        btn.classList.toggle('is-favorite',active);
+    });
+}
+
+
+/* V9 FAVORITE ALERT SETTINGS 135-3 */
+const FAVORITE_ALERTS_KEY = 'emart24-v9-favorite-alerts';
+
+function getFavoriteAlerts(){
+    try {
+        const data = JSON.parse(localStorage.getItem(FAVORITE_ALERTS_KEY) || '{}');
+        return data && typeof data === 'object' && !Array.isArray(data) ? data : {};
+    } catch(e) {
+        return {};
+    }
+}
+
+function isFavoriteAlertEnabled(plu){
+    return getFavoriteAlerts()[String(plu)] === true;
+}
+
+function toggleFavoriteAlert(plu){
+    const settings = getFavoriteAlerts();
+    const key = String(plu);
+    settings[key] = !settings[key];
+
+    try {
+        localStorage.setItem(FAVORITE_ALERTS_KEY, JSON.stringify(settings));
+        renderFavorites();
+    } catch(e) {
+        alert('알림 설정을 저장할 수 없습니다.');
+    }
+}
+
+function renderFavorites(){
+    let wrap=document.getElementById('favorites135');
+
+    if(!wrap){
+        wrap=document.createElement('section');
+        wrap.id='favorites135';
+        const productList=$('pl');
+        productList.parentNode.insertBefore(wrap,productList);
+    }
+
+    const items=getFavorites();
+
+    wrap.innerHTML=
+        '<div class="favorites-heading">'+
+            '<strong>♥ 내 즐겨찾기</strong>'+
+            '<span>'+items.length+'개 상품</span>'+
+        '</div>'+
+        (items.length
+            ? '<div class="favorites-items">'+items.map(p=>
+                '<div class="favorite-entry">'+
+                    '<button type="button" class="favorite-item" data-favorite-plu="'+E(String(p.plu))+'">'+
+                        '<span>'+E(p.name)+'</span>'+
+                        '<small>'+E(String(p.plu))+'</small>'+
+                    '</button>'+
+                    '<button type="button" class="favorite-alert-btn" data-alert-plu="'+E(String(p.plu))+'" '+
+                        'aria-label="재입고 알림 설정" aria-pressed="'+(isFavoriteAlertEnabled(p.plu)?'true':'false')+'">'+
+                        (isFavoriteAlertEnabled(p.plu)?'🔔':'🔕')+
+                    '</button>'+
+                '</div>'
+              ).join('')+'</div>'
+            : '<p class="favorites-empty">관심 상품의 ♡ 버튼을 눌러 저장해보세요.</p>');
+
+    wrap.querySelectorAll('.favorite-alert-btn').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+            toggleFavoriteAlert(btn.dataset.alertPlu);
+        });
+    });
+
+    wrap.querySelectorAll('.favorite-item').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+            const product=getFavorites().find(
+                p=>String(p.plu)===btn.dataset.favoritePlu
+            );
+            if(product) selectProduct(product);
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded',renderFavorites);
 
 async function search(){
     $('msg').textContent='검색 중...';
@@ -519,10 +1958,26 @@ async function search(){
             const x=document.createElement('div');
             x.className='p';
             x.innerHTML=
-                '<b>'+E(p.name)+'</b>'+
-                '<div class="muted">상품코드 '+E(p.plu)+' / '+E(p.price)+'</div>';
+                '<div class="fav-product-row">'+
+                    '<div class="fav-product-info">'+
+                        '<b>'+E(p.name)+'</b>'+
+                        '<div class="muted">상품코드 '+E(p.plu)+' / '+E(p.price)+'</div>'+
+                    '</div>'+
+                    '<button type="button" class="fav-heart" aria-label="즐겨찾기" '+
+                        'data-fav-plu="'+E(String(p.plu))+'">'+
+                        favoriteHeartSVG(isFavorite(p.plu))+
+                    '</button>'+
+                '</div>';
 
             x.addEventListener('click',()=>selectProduct(p));
+
+            x.querySelector('.fav-heart').addEventListener('click',event=>{
+                event.stopPropagation();
+                toggleFavorite(p);
+                renderFavorites();
+                updateFavoriteHearts();
+            });
+
             $('pl').appendChild(x);
         });
 
@@ -534,6 +1989,8 @@ async function search(){
 }
 
 function selectProduct(p){
+    alertPreviousStock.clear();
+    alertTrackingPlu=String(p.plu);
     selectedProduct=p;
 
     previousQty={};
@@ -545,21 +2002,142 @@ function selectProduct(p){
     loadInventory(false);
 }
 
+
+/* V9 MULTI FAVORITE WATCH 135-5 */
+const favoriteWatchPrevious = new Map();
+let favoriteWatchBusy = false;
+let favoriteWatchScope = '';
+
+async function watchFavoriteStocks(){
+    if(favoriteWatchBusy || document.hidden) return;
+
+    const products = getFavorites().filter(
+        p => isFavoriteAlertEnabled(p.plu)
+    );
+
+    if(!products.length) return;
+
+    const radius = Number($('radius').value);
+    const useGps = myLat !== null && myLon !== null && radius > 0;
+
+    const city = $('a1').value;
+    const district = $('a2').value.trim();
+
+    const regions = city === '서울특별시' &&
+        myLat !== null && myLon !== null
+        ? (nearbyRegions[district] || [city + ':' + district])
+        : [city + ':' + district];
+
+    const scope = useGps
+        ? 'gps:' + myLat.toFixed(4) + ':' + myLon.toFixed(4) + ':' + radius
+        : 'region:' + regions.join(',');
+
+    if(scope !== favoriteWatchScope){
+        favoriteWatchPrevious.clear();
+        favoriteWatchScope = scope;
+    }
+
+    favoriteWatchBusy = true;
+
+    try{
+        for(const product of products){
+            if(document.hidden) break;
+
+            const plu = String(product.plu);
+
+            const url = useGps
+                ? '/api/inventory/gps?plu=' + encodeURIComponent(plu) +
+                  '&lat=' + encodeURIComponent(myLat) +
+                  '&lon=' + encodeURIComponent(myLon) +
+                  '&radius=' + encodeURIComponent(radius)
+                : '/api/inventory/region?plu=' + encodeURIComponent(plu) +
+                  '&regions=' + encodeURIComponent(regions.join(','));
+
+            try{
+                const response = await fetch(url);
+                if(!response.ok) continue;
+
+                const data = await response.json();
+                if(!Array.isArray(data.stores)) continue;
+
+                const keyPrefix = scope + ':' + plu + ':';
+
+                for(const store of data.stores){
+                    if(store.stockStatus !== 'known') continue;
+
+                    const key = keyPrefix + String(store.bizNo);
+                    const qty = Number(store.quantity);
+
+                    if(!Number.isFinite(qty)) continue;
+
+                    const previous = favoriteWatchPrevious.get(key);
+
+                    if(previous === 0 && qty > 0 &&
+                       isFavorite(plu) &&
+                       isFavoriteAlertEnabled(plu)){
+                        showStockAlert(
+                            product.name + ' · ' +
+                            store.name + ' · 재고 ' + qty + '개 입고!'
+                        );
+                    }
+
+                    favoriteWatchPrevious.set(key,qty);
+                }
+            }catch(e){
+                console.warn('즐겨찾기 재고 감시 실패:',plu,e);
+            }
+        }
+    }finally{
+        favoriteWatchBusy = false;
+    }
+}
+
+setInterval(watchFavoriteStocks,60000);
+document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden) watchFavoriteStocks();
+});
+
+let inventoryRequestId = 0;
+
 async function loadInventory(isAuto=false){
+    const requestId = ++inventoryRequestId;
     if(!selectedProduct) return;
 
-    if(!isAuto) $('sl').textContent='조회 중...';
+    if(!isAuto){
+        stores = [];
+        render();
+        $('sl').textContent='조회 중...';
+    }
 
     const p=selectedProduct;
 
-    const u='/api/inventory?plu='+
-        encodeURIComponent(p.plu)+
-        '&area1='+encodeURIComponent($('a1').value)+
-        '&area2='+encodeURIComponent($('a2').value);
+    const city = $('a1').value;
+    const district = $('a2').value.trim();
+    const areas = city === '서울특별시' && myLat != null && myLon != null
+        ? (nearbyDistricts[district] || [district])
+        : [district];
+
+    const regions = city === '서울특별시' &&
+        myLat != null && myLon != null
+        ? (nearbyRegions[district] || [city + ':' + district])
+        : [city + ':' + district];
+
+    const radius = Number($('radius').value);
+    const useGps = myLat != null && myLon != null && radius > 0;
+
+    const u = useGps
+        ? '/api/inventory/gps?plu=' + encodeURIComponent(p.plu) +
+          '&lat=' + encodeURIComponent(myLat) +
+          '&lon=' + encodeURIComponent(myLon) +
+          '&radius=' + encodeURIComponent(radius)
+        : '/api/inventory/region?plu=' + encodeURIComponent(p.plu) +
+          '&regions=' + encodeURIComponent(regions.join(','));
 
     try{
         const r=await fetch(u);
         const d=await r.json();
+
+        if(requestId !== inventoryRequestId) return;
 
         if(!r.ok){
             $('liveStatus').textContent='조회 오류';
@@ -646,6 +2224,60 @@ function distanceOf(x){
     return km(myLat,myLon,Number(x.lat),Number(x.lon));
 }
 
+
+/* V9 NAVER WALK ROUTE 132 */
+function openNaverWalkRoute(store) {
+    const lat = Number(store.lat);
+    const lon = Number(store.lon);
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lon) ||
+        lat <= 0 || lon <= 0) {
+        alert('이 매장의 위치 정보가 없습니다.');
+        return;
+    }
+
+    const name = String(store.name || '이마트24');
+    const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (mobile) {
+        const params = new URLSearchParams({
+            dlat: String(lat),
+            dlng: String(lon),
+            dname: name,
+            appname: window.location.hostname || 'localhost'
+        });
+
+        if (myLat !== null && myLon !== null) {
+            params.set('slat', String(myLat));
+            params.set('slng', String(myLon));
+            params.set('sname', '내 위치');
+        }
+
+        window.location.href = 'nmap://route/walk?' + params.toString();
+    } else {
+        const query = encodeURIComponent(name + ' ' + (store.address || ''));
+        window.open(
+            'https://map.naver.com/p/search/' + query,
+            '_blank',
+            'noopener,noreferrer'
+        );
+    }
+}
+
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.naver-walk-btn');
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const store = stores.find(
+        x => String(x.bizNo) === btn.dataset.routeBiz
+    );
+
+    if (store) openNaverWalkRoute(store);
+});
+
 function render(){
     let a=[...stores];
 
@@ -721,6 +2353,12 @@ function render(){
 
     $('summary').textContent=summaryText;
 
+    updateStoreMap(a);
+
+    if(selectedProduct){
+        checkFavoriteRestock(selectedProduct,stores);
+    }
+
     if(!a.length){
         $('sl').innerHTML='<p>조건에 맞는 매장이 없습니다.</p>';
         return;
@@ -790,17 +2428,297 @@ function render(){
                 '</div>';
         }
 
-        return '<div class="store">'+
+        return '<div class="store" data-biz="'+E(String(x.bizNo))+'">'+
             '<div>'+
                 '<b>'+E(x.name)+'</b>'+
                 '<div class="muted">'+E(x.address)+'</div>'+
                 ds+
                 restock+
                 change+
+                (Number.isFinite(Number(x.lat)) &&
+                 Number.isFinite(Number(x.lon)) &&
+                 Number(x.lat) > 0 && Number(x.lon) > 0
+                    ? '<button type="button" class="naver-walk-btn" data-route-biz="'+E(String(x.bizNo))+'">🚶 네이버 길안내</button>'
+                    : '')+
             '</div>'+
             '<div class="qty '+c+'">'+E(t)+'</div>'+
         '</div>';
     }).join('');
+}
+
+
+let storeMap = null;
+let rangeCircle = null;
+let myMapMarker = null;
+let storeMarkers = null;
+let storeMarkerByBiz = {};
+let mapInitialViewDone = false;
+
+function updateStoreMap(list) {
+    if (typeof L === 'undefined') {
+        $('mapInfo').textContent = '지도 라이브러리를 불러오지 못했습니다.';
+        return;
+    }
+
+    if (!storeMap) {
+        storeMap = L.map('storeMap', {zoomControl: false}).setView([37.5665, 126.9780], 11);
+
+        /* V9 MAP DAY NIGHT 129 */
+        const mapDayLayer = L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors'
+            }
+        );
+
+        const mapNightLayer = L.tileLayer(
+            'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+            {
+                maxZoom: 19,
+                attribution: '&copy; Stadia Maps &copy; OpenMapTiles &copy; OpenStreetMap contributors'
+            }
+        );
+
+        let currentMapLayer = null;
+
+        function updateMapTheme() {
+            const isDark = document.documentElement.dataset.theme === 'dark';
+            const nextLayer = isDark ? mapNightLayer : mapDayLayer;
+
+            if (currentMapLayer === nextLayer) return;
+
+            if (currentMapLayer) {
+                storeMap.removeLayer(currentMapLayer);
+            }
+
+            nextLayer.addTo(storeMap);
+            nextLayer.bringToBack();
+            currentMapLayer = nextLayer;
+        }
+
+        updateMapTheme();
+
+        const mapThemeObserver = new MutationObserver(updateMapTheme);
+        mapThemeObserver.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+
+
+        storeMarkers = L.layerGroup().addTo(storeMap);
+
+        // 확대·축소 버튼을 지도 오른쪽에 배치
+        // 세로 드래그 확대·축소 슬라이더
+        const ZoomSlider = L.Control.extend({
+            options: { position: 'topright' },
+            onAdd: function() {
+                const wrap = L.DomUtil.create('div', 'map-zoom-slider');
+                wrap.innerHTML = `
+                    <span class="zoom-label">+</span>
+                    <input type="range" class="zoom-range"
+                        min="8" max="17" step="1"
+                        orient="vertical"
+                        aria-label="지도 확대 축소">
+                    <span class="zoom-label">−</span>
+                `;
+
+                const slider = wrap.querySelector('input');
+                slider.value = storeMap.getZoom();
+
+                L.DomEvent.disableClickPropagation(wrap);
+                L.DomEvent.disableScrollPropagation(wrap);
+
+                slider.addEventListener('input', function() {
+                    storeMap.setZoom(Number(this.value));
+                });
+
+                storeMap.on('zoomend', function() {
+                    slider.value = storeMap.getZoom();
+                });
+
+                return wrap;
+            }
+        });
+
+        storeMap.addControl(new ZoomSlider());
+
+        // 지도 내 위치 이동 버튼
+        const LocateControl = L.Control.extend({
+            options: { position: 'topright' },
+            onAdd: function() {
+                const btn = L.DomUtil.create('button', 'map-locate-btn');
+                btn.type = 'button';
+                btn.innerHTML = '⌖';
+                btn.title = '내 위치로 이동';
+                btn.setAttribute('aria-label', '내 위치로 이동');
+
+                L.DomEvent.disableClickPropagation(btn);
+                L.DomEvent.disableScrollPropagation(btn);
+
+                L.DomEvent.on(btn, 'click', function(e) {
+                    L.DomEvent.stop(e);
+
+                    // 기존 GPS 좌표가 있으면 즉시 지도 이동
+                    if (myLat !== null && myLon !== null) {
+                        storeMap.stop();
+                        storeMap.invalidateSize();
+                        storeMap.setView(
+                            [Number(myLat), Number(myLon)],
+                            17,
+                            {animate: false}
+                        );
+                        return;
+                    }
+
+                    alert('위치 정보가 없습니다. 상단의 내 위치 사용 버튼을 눌러주세요.');
+                });
+
+                
+                return btn;
+            }
+        });
+
+        storeMap.addControl(new LocateControl());
+    }
+
+
+    // 내 위치와 선택한 검색 반경 표시
+    if (rangeCircle) {
+        storeMap.removeLayer(rangeCircle);
+        rangeCircle = null;
+    }
+    if (myMapMarker) {
+        storeMap.removeLayer(myMapMarker);
+        myMapMarker = null;
+    }
+
+    if (myLat !== null && myLon !== null) {
+        myMapMarker = L.circleMarker([myLat, myLon], {
+            radius: 7,
+            color: '#ffffff',
+            weight: 3,
+            fillColor: '#2563eb',
+            fillOpacity: 1
+        }).addTo(storeMap).bindPopup('내 위치');
+
+        const km = Number($('radius').value);
+
+        if (km > 0) {
+            rangeCircle = L.circle([myLat, myLon], {
+                radius: km * 1000,
+                color: '#3b82f6',
+                weight: 2,
+                fillColor: '#3b82f6',
+                fillOpacity: 0.12,
+                dashArray: '6, 4'
+            }).addTo(storeMap);
+        }
+    }
+
+    storeMarkers.clearLayers();
+    storeMarkerByBiz = {};
+
+    const bounds = [];
+
+    for (const x of list) {
+        const lat = Number(x.lat);
+        const lon = Number(x.lon);
+
+        if (!Number.isFinite(lat) || !Number.isFinite(lon) ||
+            lat < 33 || lat > 39 || lon < 124 || lon > 132) {
+            continue;
+        }
+
+        const color = x.stockStatus !== 'known'
+            ? '#888888'
+            : x.quantity > 0 ? '#22c55e' : '#ef4444';
+
+        const stockText = x.stockStatus !== 'known'
+            ? '수량 미확인'
+            : x.quantity > 0 ? '재고 ' + x.quantity + '개' : '품절 (0개)';
+
+        const markerText = x.stockStatus !== 'known'
+            ? '?'
+            : String(x.quantity);
+
+        const marker = L.marker([lat, lon], {
+            icon: L.divIcon({
+                className: 'stock-number-marker',
+                html: '<div style="' +
+                    'background:' + color + ';' +
+                    'color:white;' +
+                    'border:2px solid white;' +
+                    'border-radius:50%;' +
+                    'width:34px;height:34px;' +
+                    'display:flex;align-items:center;justify-content:center;' +
+                    'font-size:13px;font-weight:700;' +
+                    'box-shadow:0 2px 6px #0005;' +
+                    '">' + markerText + '</div>',
+                iconSize: [38, 38],
+                iconAnchor: [19, 19],
+                popupAnchor: [0, -19]
+            })
+        });
+
+        /* V9 MARKER NAVER ROUTE 133 */
+        marker.bindPopup(
+            '<div class="map-store-popup">' +
+                '<b>' + E(x.name) + '</b>' +
+                '<div class="map-popup-address">' + E(x.address || '') + '</div>' +
+                '<strong class="map-popup-stock">' + E(stockText) + '</strong>' +
+                '<button type="button" class="naver-walk-btn" ' +
+                    'data-route-biz="' + E(String(x.bizNo)) + '">' +
+                    '🚶 네이버 길안내' +
+                '</button>' +
+            '</div>'
+        );
+
+        marker.addTo(storeMarkers);
+        storeMarkerByBiz[String(x.bizNo)] = marker;
+        bounds.push([lat, lon]);
+    }
+
+    // 최초 조회 시에만 지도 위치 자동 조정
+    if (!mapInitialViewDone) {
+        if (rangeCircle) {
+            storeMap.fitBounds(rangeCircle.getBounds(), {
+                padding: [25, 25],
+                maxZoom: 14
+            });
+            mapInitialViewDone = true;
+        } else if (bounds.length) {
+            storeMap.fitBounds(bounds, {
+                padding: [25, 25],
+                maxZoom: 14
+            });
+            mapInitialViewDone = true;
+        }
+    }
+
+    $('mapInfo').textContent =
+        '지도에 표시된 매장: ' + bounds.length + '개';
+
+    setTimeout(() => storeMap.invalidateSize(), 0);
+}
+
+
+document.addEventListener('click', function(event) {
+    const item = event.target.closest('#sl .store[data-biz]');
+    if (!item) return;
+    focusStoreOnMap(item.dataset.biz);
+});
+
+function focusStoreOnMap(bizNo) {
+    const marker = storeMarkerByBiz[String(bizNo)];
+    if (!marker || !storeMap) return;
+
+    storeMap.setView(marker.getLatLng(), 16);
+    marker.openPopup();
+    $('storeMap').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+    });
 }
 
 function setAutoRefresh(){
@@ -831,6 +2749,12 @@ $('q').addEventListener('keydown',e=>{
 
 $('locationBtn').addEventListener('click',getLocation);
 
+// 사이트 접속 시 현재 위치 자동 확인
+if (navigator.geolocation) {
+    getLocation();
+}
+
+
 $('allBtn').addEventListener('click',()=>setFilter('all'));
 $('stockBtn').addEventListener('click',()=>setFilter('stock'));
 $('restockBtn').addEventListener('click',()=>setFilter('restock'));
@@ -850,7 +2774,11 @@ document.querySelectorAll('.radius-btn').forEach(btn=>{
             $('locmsg').textContent='반경 검색을 사용하려면 먼저 내 위치 사용을 눌러주세요.';
         }
 
-        render();
+        if(selectedProduct && myLat != null && myLon != null){
+            loadInventory(false);
+        } else {
+            render();
+        }
     });
 });
 document.querySelectorAll('.interval-btn').forEach(btn=>{btn.addEventListener('click',()=>{$('interval').value=btn.dataset.sec;document.querySelectorAll('.interval-btn').forEach(x=>x.className='interval-btn secondary');btn.className='interval-btn active';setAutoRefresh();});});
@@ -860,6 +2788,282 @@ $('refreshBtn').addEventListener('click',()=>{
 });
 
 setAutoRefresh();
+</script>
+
+
+<script>
+(function () {
+    const key = 'emart24-v9-theme';
+    let saved = null;
+    try { saved = localStorage.getItem(key); } catch(e) {}
+
+    let theme = saved === 'dark' ? 'dark' : 'light';
+
+    function applyTheme() {
+        document.documentElement.setAttribute('data-theme', theme);
+        const btn = document.getElementById('themeToggle121');
+        if (btn) {
+            btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+            btn.title = theme === 'dark' ? '주간 모드' : '야간 모드';
+            btn.setAttribute('aria-label', btn.title);
+        }
+    }
+
+    const btn = document.createElement('button');
+    btn.id = 'themeToggle121';
+    btn.type = 'button';
+    document.body.appendChild(btn);
+
+    btn.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(key, theme); } catch(e) {}
+        applyTheme();
+    });
+
+    applyTheme();
+})();
+</script>
+
+
+
+<script>
+/* V9 PUSH AUTO SYNC 135-6-15 */
+let pushSyncTimer135 = null;
+
+async function syncPushFavorites135() {
+  const subscription = window.emart24PushSubscription;
+
+  if (!subscription) return;
+  if (typeof getFavorites !== 'function') return;
+  if (myLat == null || myLon == null) return;
+
+  const radius = Number(document.getElementById('radius')?.value);
+
+  if (!Number.isFinite(radius) || radius <= 0) return;
+
+  const products = getFavorites()
+    .filter(product => isFavoriteAlertEnabled(product.plu))
+    .map(product => ({
+      plu: String(product.plu),
+      name: String(product.name)
+    }));
+
+  try {
+    const response = await fetch('/api/push/watch', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        subscription: subscription.toJSON(),
+        products,
+        latitude: myLat,
+        longitude: myLon,
+        radius
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status);
+    }
+
+    console.log('푸시 즐겨찾기 동기화 완료:', products.length);
+  } catch (error) {
+    console.warn('푸시 즐겨찾기 동기화 실패:', error);
+  }
+}
+
+function schedulePushSync135() {
+  clearTimeout(pushSyncTimer135);
+  pushSyncTimer135 = setTimeout(syncPushFavorites135, 1200);
+}
+</script>
+
+<!-- V9 PUSH BUTTON 135-6-8 -->
+<div id="pushButton135" style="position:fixed;right:16px;bottom:90px;z-index:9999">
+  <button type="button" id="enablePush135"
+    style="border:0;border-radius:24px;padding:12px 16px;background:#e1306c;color:white;font-weight:700;box-shadow:0 4px 16px #0003;cursor:pointer">
+    🔔 휴대폰 알림 켜기
+  </button>
+</div>
+
+<script>
+(function(){
+  const button = document.getElementById('enablePush135');
+
+  if (!('serviceWorker' in navigator) || !('Notification' in window)) {
+    button.textContent = '알림 미지원 브라우저';
+    button.disabled = true;
+    return;
+  }
+
+  if (Notification.permission === 'granted') {
+    button.textContent = '🔔 알림 권한 허용됨';
+  }
+
+  button.addEventListener('click', async () => {
+    if (!window.isSecureContext) {
+      alert('푸시 알림은 HTTPS 환경에서 사용할 수 있습니다.');
+      return;
+    }
+
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js');
+      const permission = await Notification.requestPermission();
+
+      if (permission === 'granted') {
+        // V9 PUSH SUBSCRIBE 135-6-9
+        const keyResponse = await fetch('/api/push/public-key');
+        if (!keyResponse.ok) throw new Error('VAPID 공개키 조회 실패');
+
+        const { publicKey } = await keyResponse.json();
+
+        const padding = '='.repeat((4 - publicKey.length % 4) % 4);
+        const base64 = (publicKey + padding)
+          .replace(/-/g, '+').replace(/_/g, '/');
+
+        const raw = atob(base64);
+        const applicationServerKey = Uint8Array.from(
+          raw, character => character.charCodeAt(0)
+        );
+
+        let subscription = await registration.pushManager.getSubscription();
+
+        if (!subscription) {
+          subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey
+          });
+        }
+
+        window.emart24PushSubscription = subscription;
+
+        // V9 PUSH SEND SUBSCRIPTION 135-6-11
+        const saveResponse = await fetch('/api/push/subscribe', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(subscription.toJSON())
+        });
+
+        if (!saveResponse.ok) {
+          throw new Error('푸시 구독 서버 저장 실패: ' + saveResponse.status);
+        }
+
+        // V9 PUSH WATCH SYNC 135-6-14
+        const watchProducts = getFavorites()
+          .filter(product => isFavoriteAlertEnabled(product.plu))
+          .map(product => ({
+            plu: String(product.plu),
+            name: String(product.name)
+          }));
+
+        const watchRadius = Number(document.getElementById('radius').value);
+
+        if (myLat === null || myLon === null || watchRadius <= 0) {
+          button.textContent = '🔔 푸시 구독 저장됨';
+          alert('푸시 구독은 저장되었습니다. 상품 입고 알림을 등록하려면 내 위치를 설정하고 검색 반경을 선택해 주세요.');
+          return;
+        }
+
+        const watchResponse = await fetch('/api/push/watch', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            subscription: subscription.toJSON(),
+            products: watchProducts,
+            latitude: myLat,
+            longitude: myLon,
+            radius: watchRadius
+          })
+        });
+
+        if (!watchResponse.ok) {
+          throw new Error('알림 대상 등록 실패: ' + watchResponse.status);
+        }
+
+        const watchResult = await watchResponse.json();
+
+        button.textContent = '🔔 푸시 알림 등록됨';
+        alert('푸시 알림 대상 상품 ' + watchResult.watchCount + '개가 등록되었습니다.');
+      } else {
+        button.textContent = '🔕 알림 권한 미허용';
+      }
+    } catch (error) {
+      console.error('푸시 알림 준비 실패:', error);
+      alert('알림 설정 중 오류가 발생했습니다.');
+    }
+  });
+})();
+</script>
+
+
+<script>
+/* V9 PUSH SYNC HOOKS 135-6-17 */
+(function(){
+  const originalToggleFavorite = window.toggleFavorite;
+  const originalToggleFavoriteAlert = window.toggleFavoriteAlert;
+
+  if (typeof originalToggleFavorite === 'function') {
+    window.toggleFavorite = function(...args) {
+      const result = originalToggleFavorite.apply(this, args);
+      schedulePushSync135();
+      return result;
+    };
+  }
+
+  if (typeof originalToggleFavoriteAlert === 'function') {
+    window.toggleFavoriteAlert = function(...args) {
+      const result = originalToggleFavoriteAlert.apply(this, args);
+      schedulePushSync135();
+      return result;
+    };
+  }
+
+  const radius = document.getElementById('radius');
+  if (radius) {
+    radius.addEventListener('change', schedulePushSync135);
+  }
+
+  console.log('푸시 즐겨찾기 자동 동기화 연결 완료');
+})();
+</script>
+
+
+<script>
+/* V9 PUSH SYNC STABILITY 135-6-18 */
+(function() {
+  let previousSettings = '';
+
+  function getSettingsSnapshot() {
+    try {
+      return JSON.stringify({
+        favorites: getFavorites(),
+        alerts: getFavoriteAlerts(),
+        latitude: typeof myLat !== 'undefined' ? myLat : null,
+        longitude: typeof myLon !== 'undefined' ? myLon : null,
+        radius: document.getElementById('radius')?.value
+      });
+    } catch (error) {
+      return '';
+    }
+  }
+
+  previousSettings = getSettingsSnapshot();
+
+  setInterval(() => {
+    const currentSettings = getSettingsSnapshot();
+
+    if (!currentSettings || currentSettings === previousSettings) {
+      return;
+    }
+
+    previousSettings = currentSettings;
+
+    if (typeof schedulePushSync135 === 'function') {
+      schedulePushSync135();
+    }
+  }, 1500);
+
+  console.log('즐겨찾기 푸시 설정 변경 감지 활성화');
+})();
 </script>
 
 </body>

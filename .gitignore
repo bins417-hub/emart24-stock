@@ -11,3 +11,5 @@ stock_history.json
 
 stock_history.json
 *.cer
+.env
+.env.*
