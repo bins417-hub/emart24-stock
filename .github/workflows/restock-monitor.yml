@@ -58,3 +58,45 @@ jobs:
           VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
         run: |
           python -c "from app import run_push_notification_cycle; print(run_push_notification_cycle())"
+      - name: Send one test push
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
+        run: |
+          python - <<'PY'
+          import os
+          import psycopg
+          from app import send_restock_push
+
+          with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
+              with conn.cursor() as cur:
+                  cur.execute("""
+                      SELECT s.endpoint, s.p256dh, s.auth
+                      FROM push_subscriptions s
+                      JOIN push_watch_items w
+                        ON w.subscription_id = s.id
+                      WHERE w.enabled = TRUE
+                      ORDER BY w.id DESC
+                      LIMIT 1
+                  """)
+                  row = cur.fetchone()
+
+          if row is None:
+              print("테스트 대상 구독 없음")
+          else:
+              endpoint, p256dh, auth = row
+              subscription = {
+                  "endpoint": endpoint,
+                  "keys": {"p256dh": p256dh, "auth": auth}
+              }
+              status = send_restock_push(
+                  subscription,
+                  "🔔 푸시 알림 테스트",
+                  "테스트 발송",
+                  0
+              )
+              print("테스트 푸시 응답 코드:", status)
+          PY
